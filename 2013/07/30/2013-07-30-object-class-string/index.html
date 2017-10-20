@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,JAVASE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaSE之常见对象 - String类">
+<meta name="keywords" content="java,JAVASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE之常见对象 - String类">
+<meta property="og:url" content="http://wxhaor.me/2013/07/30/2013-07-30-object-class-string/index.html">
+<meta property="og:site_name" content="Infinite Good的博客">
+<meta property="og:description" content="JavaSE之常见对象 - String类">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130730/strmst1.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130730/strmst2.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130730/strmst5.png">
+<meta property="og:updated_time" content="2017-06-29T02:02:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaSE之常见对象 - String类">
+<meta name="twitter:description" content="JavaSE之常见对象 - String类">
+<meta name="twitter:image" content="http://wxhao2.duapp.com/blog/post-in/20130730/strmst1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wxhaor.me/2013/07/30/2013-07-30-object-class-string/"/>
+
+
+
+
+
+  <title>JavaSE之常见对象 - String类 | Infinite Good的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Infinite Good的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">别把 无知当纯洁，把愚昧当德行，把偏见当原则</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wxhaor.me/2013/07/30/2013-07-30-object-class-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Infinite Good">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/wxhao/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Infinite Good的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaSE之常见对象 - String类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-07-30T00:00:00+08:00">
+                2013-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2013/07/30/2013-07-30-object-class-string/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2013/07/30/2013-07-30-object-class-string/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>JavaSE之常见对象 - String类  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="String类的概述"><a href="#String类的概述" class="headerlink" title="String类的概述"></a>String类的概述</h2><ul>
+<li><p>String类的概述</p>
+<ul>
+<li><p>通过JDK提供的API,查看String类的说明</p>
+</li>
+<li><p>可以看到这样两句话</p>
+<ul>
+<li>字符串字面值”abc”也可以看成一个字符串对象</li>
+<li>字符串是常量,一旦被赋值,就不能被改变</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.string;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1_String</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String str = <span class="string">"abc"</span>; 	<span class="comment">//"abc"可以看诚意个字符串对象</span></div><div class="line">		str = <span class="string">"def"</span>;			<span class="comment">//当把"def"复制给str,原来的"abc"就变成了垃圾</span></div><div class="line">		System.out.println(str);<span class="comment">//String类重写toString房里返回的是该对象本身</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String类的构造方法"><a href="#String类的构造方法" class="headerlink" title="String类的构造方法"></a>String类的构造方法</h2><ul>
+<li>常见构造方法<ul>
+<li>public String();空构造</li>
+<li>public String(byte[] bytes);把字节数组转成字符串</li>
+<li>public String(byte[] bytes,int index,int length);把字节数组转成一部分字符串</li>
+<li>public String(char[] value);把字符数组转成字符串</li>
+<li>public String(char[] value,int index,int count);把字符数组转成一部分字符串</li>
+<li>public String(String original);把字符串常量值转成字符串</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.string;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2_String</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String s = <span class="keyword">new</span> String();</div><div class="line">		System.out.println(s);<span class="comment">//空白</span></div><div class="line">		</div><div class="line">		<span class="keyword">byte</span>[] arr1 = &#123;<span class="number">97</span>, <span class="number">98</span> ,<span class="number">99</span>&#125;;</div><div class="line">		String s1 = <span class="keyword">new</span> String(arr1);<span class="comment">//解码,奖计算机读得懂得转成我们读得懂得</span></div><div class="line">		System.out.println(s1);<span class="comment">//默认项目解码(GBK),</span></div><div class="line">		</div><div class="line">		<span class="keyword">byte</span>[] arr2 = &#123;<span class="number">97</span>, <span class="number">98</span> ,<span class="number">99</span>,<span class="number">100</span>,<span class="number">101</span>,<span class="number">102</span>&#125;;</div><div class="line">		String s2 = <span class="keyword">new</span> String(arr2,<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		System.out.println(s2);</div><div class="line">		</div><div class="line">		<span class="keyword">char</span>[] arr3 = &#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>&#125;;</div><div class="line">		String s3 = <span class="keyword">new</span> String(arr3);</div><div class="line">		System.out.println(s3);</div><div class="line">		</div><div class="line">		String s4 = <span class="keyword">new</span> String(arr2,<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		System.out.println(s4);</div><div class="line">		</div><div class="line">		String s5=<span class="keyword">new</span> String (<span class="string">"wxhao"</span>);</div><div class="line">		System.out.println(s5);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String类的常见面试题"><a href="#String类的常见面试题" class="headerlink" title="String类的常见面试题"></a>String类的常见面试题</h2><ol>
+<li>判断定义为String类型的s1和s2是否相等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String s1 = &quot; abc&quot;;</div><div class="line">String s2 = &quot; abc&quot;;</div><div class="line">System.out.println(s1==s2);//true</div><div class="line">System.out.println(s1.equals(s2));//true</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130730/strmst1.png" alt="String面试题1图解"></p>
+<ol>
+<li>下面这句话在内存中传建几个对象</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s1 = new String(&quot;abc&quot;);</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130730/strmst2.png" alt="String面试题2图解"></p>
+<ol>
+<li>判断定义为String类型的s1和s2是否相等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String s1 = new String(&quot;abc&quot;);</div><div class="line">String s2 = &quot;abc&quot;;</div><div class="line">System.out.println(s1==s2);</div><div class="line">System.out.println(s1.equals(s2));</div></pre></td></tr></table></figure>
+<ol>
+<li>判断定义为String类型的s1和s2是否相等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String s1 = &quot;a&quot;+&quot;b&quot;+&quot;c&quot;;</div><div class="line">String s2 = &quot; abc&quot;;</div><div class="line">System.out.println(s1==s2);</div><div class="line">System.out.println(s1.equals(s2));</div></pre></td></tr></table></figure>
+<ol>
+<li>判断定义为String类型的s1和s2是否相等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String s1 = &quot;ab&quot;;</div><div class="line">String s2 = &quot;abc&quot;;</div><div class="line">String s3 = s1+&quot;c&quot;;</div><div class="line">System.out.println(s3==s2);</div><div class="line">System.out.println(s3.equals(s2));</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130730/strmst5.png" alt="String面试题5图解"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.string;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3_String</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//demo1();</span></div><div class="line">		<span class="comment">//demo2();</span></div><div class="line">		<span class="comment">//demo3();</span></div><div class="line">		<span class="comment">//demo4();</span></div><div class="line">		String s1 = <span class="string">"ab"</span>;</div><div class="line">	    String s2 = <span class="string">"abc"</span>;</div><div class="line">	    String s3 = s1+<span class="string">"c"</span>;</div><div class="line">	    System.out.println(s3==s2);<span class="comment">//false</span></div><div class="line">	    System.out.println(s3.equals(s2));<span class="comment">//true</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo4</span><span class="params">()</span> </span>&#123;</div><div class="line">		String s1 = <span class="string">"a"</span>+<span class="string">"b"</span>+<span class="string">"c"</span>;<span class="comment">//常量优化</span></div><div class="line">	    String s2 = <span class="string">"abc"</span>;</div><div class="line">	    System.out.println(s1==s2);<span class="comment">//true</span></div><div class="line">	    System.out.println(s1.equals(s2));<span class="comment">//true</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo3</span><span class="params">()</span> </span>&#123;</div><div class="line">		String s1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</div><div class="line">	    String s2 = <span class="string">"abc"</span>;</div><div class="line">	    System.out.println(s1==s2);<span class="comment">//false</span></div><div class="line">	    System.out.println(s1.equals(s2));<span class="comment">//true</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 创建了两个对象,一个在常量池中,一个在堆内存中</span></div><div class="line">		String s1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">		String s1 = <span class="string">" abc"</span>;</div><div class="line">		String s2 = <span class="string">" abc"</span>;</div><div class="line">		System.out.println(s1 == s2);</div><div class="line">		System.out.println(s1.equals(s2));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String类的判断功能"><a href="#String类的判断功能" class="headerlink" title="String类的判断功能"></a>String类的判断功能</h2><ul>
+<li>boolean equals(Object obj);比较字符串的内容是否相容,区分大小写</li>
+<li>boolean equalsIngnoreCase(String str);比较字符串的内容是否相容,忽略大小写</li>
+<li>boolean contains(String str);判断大字符串中是否包含小字符串</li>
+<li>boolean startsWith(String str);判断字符串是否以某个指定的字符串开头</li>
+<li>boolean endsWith(String str);判断字符串是否以某个指定的字符串结尾</li>
+<li>boolean isEmpty(String str);判断字符串是否为空</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.string;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4_String</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"><span class="comment">//		demo1();</span></div><div class="line"><span class="comment">//		demo2();</span></div><div class="line">		String s1 = <span class="string">"wxhao"</span>;</div><div class="line">		String s2 = <span class="string">""</span>;</div><div class="line">		String s3 = <span class="keyword">null</span>;</div><div class="line">		</div><div class="line">		System.out.println(s1.isEmpty());</div><div class="line">		System.out.println(s2.isEmpty());</div><div class="line">		<span class="comment">//System.out.println(s3.isEmpty());//空对象,并不是空字符串</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> </span>&#123;</div><div class="line">		String s1 = <span class="string">"我是wxhao,嘿嘿"</span>;</div><div class="line">		String s2 = <span class="string">"wxhao"</span>;</div><div class="line">		String s3 = <span class="string">"sb"</span>;</div><div class="line">		String s4 = <span class="string">"我是"</span>;</div><div class="line">		String s5 = <span class="string">"嘿嘿"</span>;</div><div class="line"></div><div class="line">		System.out.println(s1.concat(s2));<span class="comment">// 判断是否包含字符串</span></div><div class="line">		System.out.println(s1.concat(s3));</div><div class="line">		System.out.println(<span class="string">"---------"</span>);</div><div class="line">		</div><div class="line">		System.out.println(s1.startsWith(s4));<span class="comment">//判断是否以传入字符串开头</span></div><div class="line">		System.out.println(s1.startsWith(s5));</div><div class="line">		System.out.println(<span class="string">"---------"</span>);</div><div class="line">		</div><div class="line">		System.out.println(s1.endsWith(s4));<span class="comment">//判断是否以传入字符串结尾</span></div><div class="line">		System.out.println(s1.endsWith(s5));</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">		String s1 = <span class="string">"wxhao"</span>;</div><div class="line">		String s2 = <span class="string">"wxhao"</span>;</div><div class="line">		String s3 = <span class="string">"Wxhao"</span>;</div><div class="line"></div><div class="line">		System.out.println(s1.equals(s2));</div><div class="line">		System.out.println(s1.equals(s3));</div><div class="line">		System.out.println(<span class="string">"------------"</span>);</div><div class="line"></div><div class="line">		System.out.println(s1.equalsIgnoreCase(s2));</div><div class="line">		System.out.println(s1.equalsIgnoreCase(s3));</div><div class="line">		System.out.println(<span class="string">"------------"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="模拟用户登录"><a href="#模拟用户登录" class="headerlink" title="模拟用户登录"></a>模拟用户登录</h2><ul>
+<li>需求:摸你登录,给三次机会,并提示还有几次</li>
+<li>用户名和密码都是admin</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		</div><div class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		</div><div class="line">		<span class="keyword">final</span> String USERNAME= <span class="string">"admin"</span>;</div><div class="line">		<span class="keyword">final</span> String PASSWORD= <span class="string">"admin"</span>;</div><div class="line">		</div><div class="line">		String usernameIn=<span class="keyword">null</span>;</div><div class="line">		String passwordIn=<span class="keyword">null</span>;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">3</span> ; i++)&#123;</div><div class="line">			System.out.println(<span class="string">"请输入用户名:"</span>);</div><div class="line">			usernameIn = sc.nextLine();</div><div class="line">			System.out.println(<span class="string">"请输入密码:"</span>);</div><div class="line">			passwordIn = sc.nextLine();</div><div class="line">			<span class="keyword">if</span>(USERNAME.equals(usernameIn)&amp;&amp;PASSWORD.equals(passwordIn))&#123;</div><div class="line">				System.out.println(<span class="string">"登录成功"</span>);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				System.out.println(<span class="string">"登录失败"</span>);</div><div class="line">				<span class="keyword">if</span>(i==<span class="number">2</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"你的错误次数已到到上限,请明天再来"</span>);</div><div class="line">				&#125;<span class="keyword">else</span>&#123;</div><div class="line">					System.out.println(<span class="string">"还有"</span>+(<span class="number">2</span>-i)+<span class="string">"次机会"</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String类的获取功能"><a href="#String类的获取功能" class="headerlink" title="String类的获取功能"></a>String类的获取功能</h2><ul>
+<li>int length();获取字符串长度</li>
+<li>char charAt(int index);获取指定索引位置的字符</li>
+<li>int indexOf(int ch);返回指定字符在此字符串中第一次出现处的索引</li>
+<li>int indexOf(String str);返回指定字符在此字符串中第一次出现处的索引</li>
+<li>int indexOf(int ch ,int fromIndex);返回指定字符在此字符串中从指定位置后第一次出现处的索引</li>
+<li>int indexOf(String str,int fromIndex);返回指定字符在此字符串中从指定位置后第一次出现处的索引</li>
+<li>lastIndexOf</li>
+<li>String substring(int start);从指定位置开始截取字符串,默认到尾数</li>
+<li>String substring(int start,int end);从指定位置开始到指定位置结束截取字符串</li>
+</ul>
+<h2 id="字符串的遍历"><a href="#字符串的遍历" class="headerlink" title="字符串的遍历"></a>字符串的遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String s= <span class="string">"wxhao"</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</div><div class="line">			<span class="keyword">char</span> c=s.charAt(i);<span class="comment">//通过索引获取每一个字符</span></div><div class="line">			System.out.println(c);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="统计不同类型字符个数"><a href="#统计不同类型字符个数" class="headerlink" title="统计不同类型字符个数"></a>统计不同类型字符个数</h2><ul>
+<li>需求:统计一个字符串中大写字母字符,小写字母字符,数字字符出现的次数,其他字符出现的次数</li>
+<li>ABCDEabcd123456!@#$%^</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 分析:字符串是由字符组成的,而字符的值都是有范围的 通过范围来判断是否包含该字符</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String s = <span class="string">"ABCDEabcd123456!@#$%^"</span>;</div><div class="line">		<span class="keyword">int</span> big = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> small = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> other = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</div><div class="line">			<span class="keyword">char</span> c = s.charAt(i);</div><div class="line">			<span class="keyword">if</span> (c &gt;= <span class="string">'A'</span> &amp;&amp; c &lt;= <span class="string">'Z'</span>) &#123;</div><div class="line">				big++;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'a'</span> &amp;&amp; c &lt;= <span class="string">'z'</span>) &#123;</div><div class="line">				small++;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</div><div class="line">				num++;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				other++;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		System.out.println(big);</div><div class="line">		System.out.println(small);</div><div class="line">		System.out.println(num);</div><div class="line">		System.out.println(other);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String类的转换功能"><a href="#String类的转换功能" class="headerlink" title="String类的转换功能"></a>String类的转换功能</h2><ul>
+<li>String的转换功能:<ul>
+<li>byte[] getBytes();把字符串转换为字节数组</li>
+<li>GBK码表一个中文代表两个字节,第一个字节为负数</li>
+<li>char[] toCharArray();把字符串转换为字符数组</li>
+<li>static String valueOf(char[] chs);吧字符数组专程字符串</li>
+<li>static String valueOf(int i);把int类型的数据转成字符串<ul>
+<li>注意:String 类的valueOf可以把任意类型的数据转成字符串</li>
+</ul>
+</li>
+<li>String toLowerCase();把字符串转成小写</li>
+<li>String toUpperCase();把字符串转成大写</li>
+<li>String concat(String str);把字符串拼接</li>
+</ul>
+</li>
+</ul>
+<h2 id="按需求转换字符"><a href="#按需求转换字符" class="headerlink" title="按需求转换字符"></a>按需求转换字符</h2><ul>
+<li>需求<ul>
+<li>把一个字符串的首字母转成大写,其余为小写</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 链式编程:只要保证每次调用完成方法返回的是对象,就可以继续调用</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String s = <span class="string">"woshiYIGEDASHUAIBI"</span>;</div><div class="line">		String str = s.substring(<span class="number">0</span>, <span class="number">1</span>).toUpperCase().concat(s.substring(<span class="number">1</span>).toLowerCase());</div><div class="line">		System.out.println(str);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="String-类的其他功能"><a href="#String-类的其他功能" class="headerlink" title="String 类的其他功能"></a>String 类的其他功能</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.string;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo7_StringMethod</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		String s1 = <span class="string">"a"</span>;</div><div class="line">		String s2 = <span class="string">"aaaa"</span>;</div><div class="line"></div><div class="line">		<span class="keyword">int</span> num = s1.compareTo(s2);<span class="comment">// 码表值比较</span></div><div class="line">		System.out.println(num);</div><div class="line"></div><div class="line">		String s3 = <span class="string">"吴"</span>;</div><div class="line">		String s4 = <span class="string">"浩"</span>;</div><div class="line"></div><div class="line">		<span class="keyword">int</span> num2 = s3.compareTo(s4);</div><div class="line">		System.out.println(num2);</div><div class="line"></div><div class="line">		System.out.println(<span class="string">'吴'</span> + <span class="number">0</span>);<span class="comment">// 查找的是Unicode码表值</span></div><div class="line">		System.out.println(<span class="string">'浩'</span> + <span class="number">0</span>);</div><div class="line"></div><div class="line">		</div><div class="line">		String s5=<span class="string">"wxhao"</span>;</div><div class="line">		String s6=<span class="string">"WXHAO"</span>;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> num3=s5.compareTo(s6);</div><div class="line">		System.out.println(num3);</div><div class="line">		<span class="keyword">int</span> num4=s5.compareToIgnoreCase(s6);</div><div class="line">		System.out.println(num4);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="字符串反转"><a href="#字符串反转" class="headerlink" title="字符串反转"></a>字符串反转</h2><ul>
+<li>举例:输入”abc”,输出”cba”</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test6</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner sc=<span class="keyword">new</span> Scanner(System.in);</div><div class="line">		String str=sc.nextLine();</div><div class="line">		<span class="keyword">char</span>[] cs=str.toCharArray();</div><div class="line">		<span class="keyword">int</span> length=cs.length;</div><div class="line">		<span class="keyword">char</span>[] newCs=<span class="keyword">new</span> <span class="keyword">char</span>[length];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</div><div class="line">			newCs[length-i-<span class="number">1</span>]=cs[i];</div><div class="line">		&#125;</div><div class="line">		System.out.println(String.valueOf(newCs));</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="在大串中查找小串出现的次数代码实现"><a href="#在大串中查找小串出现的次数代码实现" class="headerlink" title="在大串中查找小串出现的次数代码实现"></a>在大串中查找小串出现的次数代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test7_String</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String s=<span class="string">"woshiwxhao,woailyy,hahaah,wxhao,lyyheihh lyy"</span>;</div><div class="line">		String value=<span class="string">"lyy"</span>;</div><div class="line">		<span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> i=-<span class="number">1</span>;</div><div class="line">		<span class="keyword">do</span> &#123;</div><div class="line">			i=s.indexOf(value);</div><div class="line">			s=s.substring(i+value.length());</div><div class="line"><span class="comment">//			System.out.println(i);</span></div><div class="line"><span class="comment">//			System.out.println(s);</span></div><div class="line">			count++;</div><div class="line">		&#125; <span class="keyword">while</span> (i&gt;-<span class="number">1</span>&amp;&amp;!s.isEmpty());</div><div class="line">		System.out.println(count);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wxhao/wx-gzh.jpg" alt="Infinite Good wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您关注我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你觉得还不错,就请我喝杯咖啡吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wxhao/wxpay-m.jpg" alt="Infinite Good 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/wxhao/alipay-m.jpg" alt="Infinite Good 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/07/27/2013-07-27-object-class-scanner/" rel="next" title="JavaSE常见对象 - Scanner">
+                <i class="fa fa-chevron-left"></i> JavaSE常见对象 - Scanner
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/08/01/2013-08-01-object-class-stringbuffer/" rel="prev" title="JavaSE常见对象 - StringBuffer类与StringBuilder类">
+                JavaSE常见对象 - StringBuffer类与StringBuilder类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/wxhao/head.png"
+                alt="Infinite Good" />
+            
+              <p class="site-author-name" itemprop="name">Infinite Good</p>
+              <p class="site-description motion-element" itemprop="description">一枚天真无邪善良纯真的程序员欧巴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxhaor" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxhaor@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wxhao911" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="bilibili" target="_blank">bilibili</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的概述"><span class="nav-number">1.</span> <span class="nav-text">String类的概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的构造方法"><span class="nav-number">2.</span> <span class="nav-text">String类的构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的常见面试题"><span class="nav-number">3.</span> <span class="nav-text">String类的常见面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的判断功能"><span class="nav-number">4.</span> <span class="nav-text">String类的判断功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟用户登录"><span class="nav-number">5.</span> <span class="nav-text">模拟用户登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的获取功能"><span class="nav-number">6.</span> <span class="nav-text">String类的获取功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的遍历"><span class="nav-number">7.</span> <span class="nav-text">字符串的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计不同类型字符个数"><span class="nav-number">8.</span> <span class="nav-text">统计不同类型字符个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类的转换功能"><span class="nav-number">9.</span> <span class="nav-text">String类的转换功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按需求转换字符"><span class="nav-number">10.</span> <span class="nav-text">按需求转换字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-类的其他功能"><span class="nav-number">11.</span> <span class="nav-text">String 类的其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串反转"><span class="nav-number">12.</span> <span class="nav-text">字符串反转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在大串中查找小串出现的次数代码实现"><span class="nav-number">13.</span> <span class="nav-text">在大串中查找小串出现的次数代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Infinite Good</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyth2mi9I';
+      var conf = '4da0d3927cf9cf22b281a3d2f352ccbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,JAVASE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="不知道说什么">
+<meta name="keywords" content="java,JAVASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象思想及其内存分配">
+<meta property="og:url" content="http://wxhaor.me/2013/06/26/2013-06-26-javase-obj-jvm/index.html">
+<meta property="og:site_name" content="Infinite Good的博客">
+<meta property="og:description" content="不知道说什么">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/mjbgz.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/ygdxnct.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/lgdxnct.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/sgyylgnct.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/jbsjlxdzcd.png">
+<meta property="og:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/yysjlxdzcd.png">
+<meta property="og:updated_time" content="2017-06-28T12:16:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象思想及其内存分配">
+<meta name="twitter:description" content="不知道说什么">
+<meta name="twitter:image" content="http://wxhao2.duapp.com/blog/post-in/20130626/mjbgz.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wxhaor.me/2013/06/26/2013-06-26-javase-obj-jvm/"/>
+
+
+
+
+
+  <title>面向对象思想及其内存分配 | Infinite Good的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Infinite Good的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">别把 无知当纯洁，把愚昧当德行，把偏见当原则</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wxhaor.me/2013/06/26/2013-06-26-javase-obj-jvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Infinite Good">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/wxhao/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Infinite Good的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面向对象思想及其内存分配</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-06-26T00:00:00+08:00">
+                2013-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2013/06/26/2013-06-26-javase-obj-jvm/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2013/06/26/2013-06-26-javase-obj-jvm/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>不知道说什么  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="面向对象思想概述"><a href="#面向对象思想概述" class="headerlink" title="面向对象思想概述"></a>面向对象思想概述</h2><ul>
+<li>面向过程思想概述<ul>
+<li>第一步</li>
+<li>第二步 </li>
+</ul>
+</li>
+<li>面向对象思想概述<br>找对象(第一步,第二步)<br>*:举例<ul>
+<li>买煎饼果子</li>
+<li>洗衣服 </li>
+</ul>
+</li>
+</ul>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/mjbgz.png" alt="买煎饼果子"></p>
+<ul>
+<li>面向对象思想特点<ul>
+<li>是一种更符合我们思想习惯的思想</li>
+<li>可以将复杂的事情简单化</li>
+<li>将我们从执行者变成了指挥者<br>角色发生了转换</li>
+</ul>
+</li>
+<li>面向对象开发<br>就是不断的创建对象，使用对象，指挥对象做事情。</li>
+<li>面向对象设计<br>其实就是在管理和维护对象之间的关系。</li>
+<li>面向对象特征<ul>
+<li>封装(encapsulation)</li>
+<li>继承(inheritance)</li>
+<li>多态(polymorphism)</li>
+</ul>
+</li>
+</ul>
+<h2 id="类与对象概述"><a href="#类与对象概述" class="headerlink" title="类与对象概述"></a>类与对象概述</h2><ul>
+<li>我们学习编程是为了什么<br>为了把我们日常生活中实物用学习语言描述出来</li>
+<li>我们如何描述现实世界事物<br>属性 就是该事物的描述信息(事物身上的名词)<ul>
+<li>行为就是该事物能够做什么(事物身上的动词)</li>
+</ul>
+</li>
+<li>Java中最基本的单位是类,Java中用class描述事物也是如此<br>成员变量    就是事物的属性<ul>
+<li>成员方法就是事物的行为<br>*:定义类其实就是定义类的成员(成员变量和成员方法)<br>成员变量    和以前定义变量是一样的，只不过位置发生了改变。在类中，方法外。</li>
+<li>成员方法和以前定义方法是一样的，只不过把static去掉，后面在详细讲解static的作用。</li>
+</ul>
+</li>
+<li>类和对象的概念<ul>
+<li>类：是一组相关的属性和行为的集合</li>
+<li>对象：是该类事物的具体体现</li>
+<li>举例：<ul>
+<li>类     学生<br>对象具体的某个学生就是一个对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="学生类的定义"><a href="#学生类的定义" class="headerlink" title="学生类的定义"></a>学生类的定义</h2><ul>
+<li>学生事物</li>
+<li>学生类</li>
+<li>代码演示<ul>
+<li>属性:姓名,年龄,性别</li>
+<li>行为:学习,睡觉</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">	String name;	<span class="comment">//姓名</span></div><div class="line">	<span class="keyword">int</span> age;		<span class="comment">//年龄</span></div><div class="line">	String gender;	<span class="comment">//性别</span></div><div class="line">	<span class="comment">//定义学习的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span> </span>&#123;	</div><div class="line">		System.out.println(<span class="string">"学生学习"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//定义睡觉的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span> </span>&#123;				</div><div class="line">		System.out.println(<span class="string">"学生睡觉"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="手机类的定义"><a href="#手机类的定义" class="headerlink" title="手机类的定义"></a>手机类的定义</h2><ul>
+<li>模仿学生类，让学生自己完成<ul>
+<li>属性:品牌(brand)价格(price)</li>
+<li>行为:打电话(call),发信息(sendMessage)玩游戏(playGame)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</div><div class="line">	String brand;	<span class="comment">//品牌</span></div><div class="line">	<span class="keyword">int</span> price;		<span class="comment">//价格</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;<span class="comment">//打电话</span></div><div class="line">		System.out.println(<span class="string">"打电话"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">()</span> </span>&#123;	<span class="comment">//发信息</span></div><div class="line">		System.out.println(<span class="string">"发信息"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">playGame</span><span class="params">()</span> </span>&#123;<span class="comment">//玩游戏</span></div><div class="line">		System.out.println(<span class="string">"玩游戏"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="学生类的使用"><a href="#学生类的使用" class="headerlink" title="学生类的使用"></a>学生类的使用</h2><ul>
+<li>文件名问题<ul>
+<li>在一个java文件中写两个类：一个基本的类，一个测试类。</li>
+<li>建议：文件名称和测试类名称一致。</li>
+</ul>
+</li>
+<li>如何使用对象?<ul>
+<li>创建对象并使用</li>
+<li>格式：类名 对象名 = new 类名();</li>
+</ul>
+</li>
+<li>如何使用成员变量呢?<ul>
+<li>对象名.变量名</li>
+</ul>
+</li>
+<li>如何使用成员方法呢?<ul>
+<li>对象名.方法名(…)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo_Student</span> </span>&#123;<span class="comment">//测试类</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//创建对象的格式:类名 对象名 = new 类名();</span></div><div class="line">		<span class="comment">//对象名:其实就是合法的标识符,如果是一个单词所有字母小写,如果是多个单词,从第二个单词开始首字母大写</span></div><div class="line">		Student s = <span class="keyword">new</span> Student();</div><div class="line">		<span class="comment">//* D:如何使用成员变量呢?</span></div><div class="line">		<span class="comment">//* 对象名.变量名</span></div><div class="line">		s.name = <span class="string">"张三"</span>;</div><div class="line">		s.age = <span class="number">23</span>;</div><div class="line"></div><div class="line">		System.out.println(s.name + <span class="string">"..."</span> + s.age);</div><div class="line">		<span class="comment">//* E:如何使用成员方法呢?</span></div><div class="line">		<span class="comment">//* 对象名.方法名(...)</span></div><div class="line">		s.study();</div><div class="line">		s.sleep();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="手机类的使用"><a href="#手机类的使用" class="headerlink" title="手机类的使用"></a>手机类的使用</h2><ul>
+<li>学生自己完成<br>模仿学生类，让学生自己完成</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo_Phone</span> </span>&#123;<span class="comment">//测试类</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//创建对象</span></div><div class="line">		Phone p = <span class="keyword">new</span> Phone();</div><div class="line">		<span class="comment">//调用对象中的属性并赋值</span></div><div class="line">		p.brand = <span class="string">"锤子"</span>;</div><div class="line">		p.price = <span class="number">998</span>;</div><div class="line"></div><div class="line">		System.out.println(p.brand + <span class="string">"..."</span>  + p.price);</div><div class="line"></div><div class="line">		<span class="comment">//调用成员方法</span></div><div class="line">		p.call();</div><div class="line">		p.sendMessage();</div><div class="line">		p.playGame();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="一个对象的内存图"><a href="#一个对象的内存图" class="headerlink" title="一个对象的内存图"></a>一个对象的内存图</h2><ul>
+<li>画图演示<br>一个对象</li>
+<li>按上节所述,↓java文件应该起名为Demo_Car.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo_Car</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Car c1 = <span class="keyword">new</span> Car();	<span class="comment">//创建对象</span></div><div class="line"></div><div class="line">		<span class="comment">//调用属性并赋值</span></div><div class="line">		c1.color = <span class="string">"red"</span>;	<span class="comment">//为车的颜色赋值</span></div><div class="line">		c1.num = <span class="number">8</span>;			<span class="comment">//为车的轮胎数赋值</span></div><div class="line"></div><div class="line">		<span class="comment">//调用行为</span></div><div class="line">		c1.run();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line">	<span class="comment">//成员变量</span></div><div class="line">	String color;			<span class="comment">//车的颜色</span></div><div class="line">	<span class="keyword">int</span> num;				<span class="comment">//车的轮胎数</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;		<span class="comment">//车运行</span></div><div class="line">		System.out.println(color + <span class="string">"..."</span> + num);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/ygdxnct.png" alt="一个对象的内存图"></p>
+<h2 id="二个对象的内存图"><a href="#二个对象的内存图" class="headerlink" title="二个对象的内存图"></a>二个对象的内存图</h2><ul>
+<li>画图演示<br>二个不同的对象</li>
+<li>在上方main方法中增加如下代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建对象</span></div><div class="line">Car c2 = <span class="keyword">new</span> Car();				</div><div class="line"><span class="comment">//为车的颜色赋值</span></div><div class="line">c2.color = <span class="string">"black"</span>;	</div><div class="line">      <span class="comment">//为车的轮胎数赋值</span></div><div class="line">c2.num = <span class="number">4</span>;						</div><div class="line">c2.run();</div><div class="line"></div><div class="line"><span class="comment">//c2 = null;//用null把原来的地址值覆盖掉了						</span></div><div class="line"></div><div class="line"><span class="comment">//c2.run();	//c2里面记录的是null,所以报出空指针异常</span></div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/lgdxnct.png" alt="两个对象的内存图"></p>
+<p>如果没有任何引用指向该对象,那么该对象就会变成垃圾,java中有完善的垃圾回收机制,会在不定时进行回收</p>
+<h2 id="三个引用两个对象的内存图"><a href="#三个引用两个对象的内存图" class="headerlink" title="三个引用两个对象的内存图"></a>三个引用两个对象的内存图</h2><ul>
+<li>画图演示<br>三个引用，有两个对象的引用指向同一个地址</li>
+<li>在上方main方法中增加如下代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Car c3 = c2;</div><div class="line">c3.run();</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/sgyylgnct.png" alt="三个引用两个对象内存图"></p>
+<h2 id="成员变量和局部变量的区别"><a href="#成员变量和局部变量的区别" class="headerlink" title="成员变量和局部变量的区别"></a>成员变量和局部变量的区别</h2><ul>
+<li>在类中的位置不同<ul>
+<li>成员变量：在类中方法外</li>
+<li>局部变量：在方法定义中或者方法声明上</li>
+</ul>
+</li>
+<li>在内存中的位置不同<ul>
+<li>成员变量：在堆内存(成员变量属于对象,对象进堆内存)</li>
+<li>局部变量：在栈内存(局部变量属于方法,方法进栈内存)</li>
+</ul>
+</li>
+<li>生命周期不同<ul>
+<li>成员变量：随着对象的创建而存在，随着对象的消失而消失</li>
+<li>局部变量：随着方法的调用而存在，随着方法的调用完毕而消失</li>
+</ul>
+</li>
+<li><p>初始化值不同</p>
+<ul>
+<li>成员变量：有默认初始化值</li>
+<li>局部变量：没有默认初始化值，必须定义，赋值，然后才能使用。</li>
+</ul>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>局部变量名称可以和成员变量名称一样，在方法中使用的时候，采用的是就近原则。</li>
+<li>基本数据类型变量包括哪些:byte,short,int,long,float,double,boolean,char</li>
+<li>引用数据类型变量包括哪些:数组,类,接口,枚举</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo2_Person</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Person p = <span class="keyword">new</span> Person();</div><div class="line">		p.speak();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	String name;	<span class="comment">//成员变量</span></div><div class="line">	<span class="keyword">int</span> num;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> num = <span class="number">10</span>;<span class="comment">//x和num都是局部变量</span></div><div class="line">		System.out.println(name);</div><div class="line">	</div><div class="line">		System.out.println(num);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="思考题Java中的参数传递问题及图解"><a href="#思考题Java中的参数传递问题及图解" class="headerlink" title="思考题Java中的参数传递问题及图解"></a>思考题Java中的参数传递问题及图解</h2><ul>
+<li>案例演示</li>
+<li>看程序写结果，并画内存图解释</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">基本数据类型的值传递,不改变原值,因为调用后就会弹栈,局部变量随之消失</span></div><div class="line"><span class="comment">引用数据类型的值传递,改变原值,因为即使方法弹栈,但是堆内存数组对象还在,可以通过地址继续访问</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">*/</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test_Array</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">/*int a = 10;</span></div><div class="line"><span class="comment">		int b = 20;</span></div><div class="line"><span class="comment">		System.out.println("a:"+a+",b:"+b);	//a = 10,b = 20</span></div><div class="line"><span class="comment">		change(a,b);</span></div><div class="line"><span class="comment">		System.out.println("a:"+a+",b:"+b);	//?*/</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</div><div class="line">		change(arr);</div><div class="line">		System.out.println(arr[<span class="number">1</span>]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123;<span class="comment">//a = 10, b= 20</span></div><div class="line">		System.out.println(<span class="string">"a:"</span>+a+<span class="string">",b:"</span>+b);	<span class="comment">//a = 10,b = 20</span></div><div class="line">		a = b;								<span class="comment">//a = 20</span></div><div class="line">		b = a + b;							<span class="comment">//b = 40</span></div><div class="line">		System.out.println(<span class="string">"a:"</span>+a+<span class="string">",b:"</span>+b);	<span class="comment">//a = 20, b = 40</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;	<span class="comment">//1,4,3,8,5</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>; x&lt;arr.length; x++) &#123;</div><div class="line">			<span class="keyword">if</span>(arr[x]%<span class="number">2</span>==<span class="number">0</span>) &#123;</div><div class="line">				arr[x]*=<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/jbsjlxdzcd.png" alt="基本数据类型的值传递"></p>
+<p><img src="http://wxhao2.duapp.com/blog/post-in/20130626/yysjlxdzcd.png" alt="引用数据类型的值传递"></p>
+<ul>
+<li>Java中到底是传值还是传址<ol>
+<li>既是传值,也是传地址,基本数据类型传递的值,引用数据类型传递的地址</li>
+<li>java中只有传值,因为地址值也是值(出去面试都说这种,支持者是高斯林(java之父))</li>
+</ol>
+</li>
+</ul>
+<p><a href="http://pan.baidu.com/s/1mh5pf9Q" target="_blank" rel="external">java虚拟机详解.docx百度云链接</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wxhao/wx-gzh.jpg" alt="Infinite Good wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您关注我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你觉得还不错,就请我喝杯咖啡吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wxhao/wxpay-m.jpg" alt="Infinite Good 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/wxhao/alipay-m.jpg" alt="Infinite Good 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/06/24/2013-06-24-markdown-exception-cache/" rel="next" title="markdown 异常记录">
+                <i class="fa fa-chevron-left"></i> markdown 异常记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/06/28/2013-06-28-javase-obj-special-jvm/" rel="prev" title="面向对象的特点及其使用">
+                面向对象的特点及其使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/wxhao/head.png"
+                alt="Infinite Good" />
+            
+              <p class="site-author-name" itemprop="name">Infinite Good</p>
+              <p class="site-description motion-element" itemprop="description">一枚天真无邪善良纯真的程序员欧巴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxhaor" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxhaor@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wxhao911" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="bilibili" target="_blank">bilibili</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象思想概述"><span class="nav-number">1.</span> <span class="nav-text">面向对象思想概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与对象概述"><span class="nav-number">2.</span> <span class="nav-text">类与对象概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学生类的定义"><span class="nav-number">3.</span> <span class="nav-text">学生类的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机类的定义"><span class="nav-number">4.</span> <span class="nav-text">手机类的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学生类的使用"><span class="nav-number">5.</span> <span class="nav-text">学生类的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机类的使用"><span class="nav-number">6.</span> <span class="nav-text">手机类的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个对象的内存图"><span class="nav-number">7.</span> <span class="nav-text">一个对象的内存图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二个对象的内存图"><span class="nav-number">8.</span> <span class="nav-text">二个对象的内存图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个引用两个对象的内存图"><span class="nav-number">9.</span> <span class="nav-text">三个引用两个对象的内存图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员变量和局部变量的区别"><span class="nav-number">10.</span> <span class="nav-text">成员变量和局部变量的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题Java中的参数传递问题及图解"><span class="nav-number">11.</span> <span class="nav-text">思考题Java中的参数传递问题及图解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Infinite Good</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyth2mi9I';
+      var conf = '4da0d3927cf9cf22b281a3d2f352ccbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

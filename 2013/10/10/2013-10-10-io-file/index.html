@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,JAVASE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaSE之IO流 - File类练习">
+<meta name="keywords" content="java,JAVASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE之IO流 - File类练习">
+<meta property="og:url" content="http://wxhaor.me/2013/10/10/2013-10-10-io-file/index.html">
+<meta property="og:site_name" content="Infinite Good的博客">
+<meta property="og:description" content="JavaSE之IO流 - File类练习">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-06-29T03:17:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaSE之IO流 - File类练习">
+<meta name="twitter:description" content="JavaSE之IO流 - File类练习">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wxhaor.me/2013/10/10/2013-10-10-io-file/"/>
+
+
+
+
+
+  <title>JavaSE之IO流 - File类练习 | Infinite Good的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Infinite Good的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">别把 无知当纯洁，把愚昧当德行，把偏见当原则</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wxhaor.me/2013/10/10/2013-10-10-io-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Infinite Good">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/wxhao/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Infinite Good的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaSE之IO流 - File类练习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-10-10T00:00:00+08:00">
+                2013-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2013/10/10/2013-10-10-io-file/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2013/10/10/2013-10-10-io-file/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>JavaSE之IO流 - File类练习  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="统计该文件夹大小"><a href="#统计该文件夹大小" class="headerlink" title="统计该文件夹大小"></a>统计该文件夹大小</h2><ul>
+<li>需求:1,从键盘接收一个文件夹路径,统计该文件夹大小</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 从键盘接收一个文件夹路径</span></div><div class="line"><span class="comment"> * 1,创建键盘录入对象</span></div><div class="line"><span class="comment"> * 2,定义一个无限循环</span></div><div class="line"><span class="comment"> * 3,将键盘录入的结果存储并封装成File对象</span></div><div class="line"><span class="comment"> * 4,对File对象判断</span></div><div class="line"><span class="comment"> * 5,将文件夹路径对象返回</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> * 统计该文件夹大小 </span></div><div class="line"><span class="comment"> * 1,定义一个求和变量</span></div><div class="line"><span class="comment"> * 2,获取该文件夹下所有的文件和文件夹listFiles();</span></div><div class="line"><span class="comment"> * 3,遍历数组</span></div><div class="line"><span class="comment"> * 4,判断是文件就计算大小并累加</span></div><div class="line"><span class="comment"> * 5,判断是文件夹,递归调用</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//File dir = new File("F:\\day06");</span></div><div class="line">	<span class="comment">//System.out.println(dir.length());				//直接获取文件夹的结果是0</span></div><div class="line">	File dir = getDir();</div><div class="line">	System.out.println(getFileLength(dir));</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 从键盘接收一个文件夹路径</span></div><div class="line"><span class="comment"> * 1,返回值类型File</span></div><div class="line"><span class="comment"> * 2,参数列表无</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> File <span class="title">getDir</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//1,创建键盘录入对象</span></div><div class="line">	Scanner sc = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">	System.out.println(<span class="string">"请输入一个文件夹路径:"</span>);</div><div class="line">	<span class="comment">//2,定义一个无限循环</span></div><div class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">		<span class="comment">//3,将键盘录入的结果存储并封装成File对象</span></div><div class="line">		String line = sc.nextLine();</div><div class="line">		File dir = <span class="keyword">new</span> File(line);</div><div class="line">		<span class="comment">//4,对File对象判断</span></div><div class="line">		<span class="keyword">if</span>(!dir.exists()) &#123;</div><div class="line">			System.out.println(<span class="string">"您录入的文件夹路径不存在,请输入一个文件夹路径:"</span>);</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(dir.isFile()) &#123;</div><div class="line">			System.out.println(<span class="string">"您录入的是文件路径,请输入一个文件夹路径:"</span>);</div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">//5,将文件夹路径对象返回</span></div><div class="line">			<span class="keyword">return</span> dir;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 统计该文件夹大小 </span></div><div class="line"><span class="comment"> * 1,返回值类型long</span></div><div class="line"><span class="comment"> * 2,参数列表File dir</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getFileLength</span><span class="params">(File dir)</span> </span>&#123;	<span class="comment">//dir = F:\day06\day07</span></div><div class="line">	<span class="comment">//1,定义一个求和变量</span></div><div class="line">	<span class="keyword">long</span> len = <span class="number">0</span>;</div><div class="line">	<span class="comment">//2,获取该文件夹下所有的文件和文件夹listFiles();</span></div><div class="line">	File[] subFiles = dir.listFiles();			<span class="comment">//day07 Demo1_Student.class Demo1_Student.java</span></div><div class="line">	<span class="comment">//3,遍历数组</span></div><div class="line">	<span class="keyword">for</span> (File subFile : subFiles) &#123;</div><div class="line">		<span class="comment">//4,判断是文件就计算大小并累加</span></div><div class="line">		<span class="keyword">if</span>(subFile.isFile()) &#123;</div><div class="line">			len = len + subFile.length();</div><div class="line">		<span class="comment">//5,判断是文件夹,递归调用</span></div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			len = len + getFileLength(subFile);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> len;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="删除该文件夹"><a href="#删除该文件夹" class="headerlink" title="删除该文件夹"></a>删除该文件夹</h2><ul>
+<li>需求:2,从键盘接收一个文件夹路径,删除该文件夹</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 删除该文件夹</span></div><div class="line"><span class="comment"> * 分析:</span></div><div class="line"><span class="comment"> * 1,获取该文件夹下的所有的文件和文件夹</span></div><div class="line"><span class="comment"> * 2,遍历数组</span></div><div class="line"><span class="comment"> * 3,判断是文件直接删除</span></div><div class="line"><span class="comment"> * 4,如果是文件夹,递归调用</span></div><div class="line"><span class="comment"> * 5,循环结束后,把空文件夹删掉</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	File dir = Test1.getDir();					<span class="comment">//获取文件夹路径</span></div><div class="line">	deleteFile(dir);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 删除该文件夹</span></div><div class="line"><span class="comment"> * 1,返回值类型 void</span></div><div class="line"><span class="comment"> * 2,参数列表File dir</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteFile</span><span class="params">(File dir)</span> </span>&#123;	</div><div class="line">	<span class="comment">//1,获取该文件夹下的所有的文件和文件夹</span></div><div class="line">	File[] subFiles = dir.listFiles();		</div><div class="line">	<span class="comment">//2,遍历数组</span></div><div class="line">	<span class="keyword">for</span> (File subFile : subFiles) &#123;</div><div class="line">		<span class="comment">//3,判断是文件直接删除</span></div><div class="line">		<span class="keyword">if</span>(subFile.isFile()) &#123;</div><div class="line">			subFile.delete();</div><div class="line">		<span class="comment">//4,如果是文件夹,递归调用</span></div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			deleteFile(subFile);			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//5,循环结束后,把空文件夹删掉</span></div><div class="line">	dir.delete();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h2><ul>
+<li>需求:3,从键盘接收两个文件夹路径,把其中一个文件夹中(包含内容)拷贝到另一个文件夹中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 把其中一个文件夹中(包含内容)拷贝到另一个文件夹中</span></div><div class="line"><span class="comment"> * 分析:</span></div><div class="line"><span class="comment"> * 1,在目标文件夹中创建原文件夹</span></div><div class="line"><span class="comment"> * 2,获取原文件夹中所有的文件和文件夹,存储在File数组中</span></div><div class="line"><span class="comment"> * 3,遍历数组</span></div><div class="line"><span class="comment"> * 4,如果是文件就用io流读写</span></div><div class="line"><span class="comment"> * 5,如果是文件夹就递归调用</span></div><div class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException </span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">	File src = Test1.getDir();</div><div class="line">	File dest = Test1.getDir();</div><div class="line">	<span class="keyword">if</span>(src.equals(dest)) &#123;</div><div class="line">		System.out.println(<span class="string">"目标文件夹是源文件夹的子文件夹"</span>);</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">		copy(src,dest);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 把其中一个文件夹中(包含内容)拷贝到另一个文件夹中</span></div><div class="line"><span class="comment"> * 1,返回值类型void</span></div><div class="line"><span class="comment"> * 2,参数列表File src,File dest</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy</span><span class="params">(File src, File dest)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">	<span class="comment">//1,在目标文件夹中创建原文件夹</span></div><div class="line">	File newDir = <span class="keyword">new</span> File(dest, src.getName());</div><div class="line">	newDir.mkdir();</div><div class="line">	<span class="comment">//2,获取原文件夹中所有的文件和文件夹,存储在File数组中</span></div><div class="line">	File[] subFiles = src.listFiles();</div><div class="line">	<span class="comment">//3,遍历数组</span></div><div class="line">	<span class="keyword">for</span> (File subFile : subFiles) &#123;</div><div class="line">		<span class="comment">//4,如果是文件就用io流读写</span></div><div class="line">		<span class="keyword">if</span>(subFile.isFile()) &#123;</div><div class="line">			BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(subFile));</div><div class="line">			BufferedOutputStream bos = </div><div class="line">					<span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(newDir,subFile.getName())));</div><div class="line">			</div><div class="line">			<span class="keyword">int</span> b;</div><div class="line">			<span class="keyword">while</span>((b = bis.read()) != -<span class="number">1</span>) &#123;</div><div class="line">				bos.write(b);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			bis.close();</div><div class="line">			bos.close();</div><div class="line">		<span class="comment">//5,如果是文件夹就递归调用</span></div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			copy(subFile,newDir);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="按层级打印"><a href="#按层级打印" class="headerlink" title="按层级打印"></a>按层级打印</h2><ul>
+<li>需求:4,从键盘接收一个文件夹路径,把文件夹中的所有文件以及文件夹的名字按层级打印, 例如:<br>aaa是文件夹,里面有bbb.txt,ccc.txt,ddd.txt这些文件,有eee这样的文件夹,eee中有fff.txt和ggg.txt,打印出层级来</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">aaa</div><div class="line">	bbb.txt</div><div class="line">	ccc.txt</div><div class="line">	ddd.txt</div><div class="line"></div><div class="line">	eee</div><div class="line">		fff.txt</div><div class="line">		ggg.txt</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 把文件夹中的所有文件以及文件夹的名字按层级打印</span></div><div class="line"><span class="comment"> * 分析:</span></div><div class="line"><span class="comment"> * 1,获取所有文件和文件夹,返回的File数组</span></div><div class="line"><span class="comment"> * 2,遍历数组</span></div><div class="line"><span class="comment"> * 3,无论是文件还是文件夹,都需要直接打印</span></div><div class="line"><span class="comment"> * 4,如果是文件夹,递归调用</span></div><div class="line"><span class="comment"> * 	day07</span></div><div class="line"><span class="comment"> * 		day08</span></div><div class="line"><span class="comment"> * 			xxx.jpg</span></div><div class="line"><span class="comment"> * 			yyy.txt</span></div><div class="line"><span class="comment"> * 		Demo1_Consturctor.class</span></div><div class="line"><span class="comment"> * 		Demo1_Consturctor.java</span></div><div class="line"><span class="comment"> * 	Demo1_Student.class</span></div><div class="line"><span class="comment"> * 	Demo1_Student.java</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	File dir = Test1.getDir();				<span class="comment">//获取文件夹路径</span></div><div class="line">	printLev(dir,<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLev</span><span class="params">(File dir,<span class="keyword">int</span> lev)</span> </span>&#123;</div><div class="line">	<span class="comment">//1,把文件夹中的所有文件以及文件夹的名字按层级打印</span></div><div class="line">	File[] subFiles = dir.listFiles();</div><div class="line">	<span class="comment">//2,遍历数组</span></div><div class="line">	<span class="keyword">for</span> (File subFile : subFiles) &#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= lev; i++) &#123;</div><div class="line">			System.out.print(<span class="string">"\t"</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//3,无论是文件还是文件夹,都需要直接打印</span></div><div class="line">		System.out.println(subFile);</div><div class="line">		<span class="comment">//4,如果是文件夹,递归调用</span></div><div class="line">		<span class="keyword">if</span>(subFile.isDirectory()) &#123;</div><div class="line">			<span class="comment">//printLev(subFile,lev + 1);</span></div><div class="line">			printLev(subFile,++lev);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><ul>
+<li>不死神兔</li>
+<li>故事得从西元1202年说起，话说有一位意大利青年，名叫斐波那契。</li>
+<li>在他的一部著作中提出了一个有趣的问题：假设一对刚出生的小兔一个月后就能长成大兔，再过一个月就能生下一对小兔，并且此后每个月都生一对小兔，一年内没有发生死亡，</li>
+<li>问：一对刚出生的兔子，一年内繁殖成多少对兔子?</li>
+<li>1 1 2 3 5 8 13</li>
+<li>第一个月一对小兔子 1</li>
+<li>第二个月一对大兔子 1</li>
+<li>第三个月一对大兔子生了一对小兔子 2</li>
+<li>第四个月一对大兔子生了一对小兔子<br>一对小兔子长成大兔子    3<ul>
+<li>第五个月两对大兔子生两对小兔子<br>一对小兔子长成大兔子5</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* 1 1 2 3 5 8 13 21</span></div><div class="line"><span class="comment">* 1 = fun(1)</span></div><div class="line"><span class="comment">* 1 = fun(2)</span></div><div class="line"><span class="comment">* 2 = fun(1) + fun(2)</span></div><div class="line"><span class="comment">* 3 = fun(2) + fun(3)</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//demo1();</span></div><div class="line">	System.out.println(fun(<span class="number">8</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//用数组做不死神兔</span></div><div class="line">	<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8</span>];</div><div class="line">	<span class="comment">//数组中第一个元素和第二个元素都为1</span></div><div class="line">	arr[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	arr[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">	<span class="comment">//遍历数组对其他元素赋值</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; arr.length; i++) &#123;</div><div class="line">		arr[i] = arr[i - <span class="number">2</span>] + arr[i - <span class="number">1</span>];</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//如何获取最后一个数</span></div><div class="line">	System.out.println(arr[arr.length - <span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 用递归求斐波那契数列</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span>(num == <span class="number">1</span> || num == <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> fun(num - <span class="number">2</span>) + fun(num - <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="1000的阶乘所有零和尾部零的个数"><a href="#1000的阶乘所有零和尾部零的个数" class="headerlink" title="1000的阶乘所有零和尾部零的个数"></a>1000的阶乘所有零和尾部零的个数</h2><ul>
+<li><p>需求:求出1000的阶乘所有零和尾部零的个数,不用递归做</p>
+</li>
+<li><p>因为1000的阶乘远远超出了int的取值范围,所以要用BigInteger</p>
+</li>
+<li>尾部0</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">BigInteger bi1 = <span class="keyword">new</span> BigInteger(<span class="string">"1"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1000</span>; i++) &#123;</div><div class="line">	BigInteger bi2 = <span class="keyword">new</span> BigInteger(i+<span class="string">""</span>);</div><div class="line">	bi1 = bi1.multiply(bi2);	<span class="comment">//将bi1与bi2相乘的结果赋值给bi1</span></div><div class="line">&#125;</div><div class="line">String str = bi1.toString();	<span class="comment">//获取字符串表现形式</span></div><div class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</div><div class="line">	<span class="keyword">if</span>(<span class="string">'0'</span> == str.charAt(i)) &#123;	<span class="comment">//如果字符串中出现了0字符</span></div><div class="line">		count++;				<span class="comment">//计数器加1</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">System.out.println(count);</div></pre></td></tr></table></figure>
+<ul>
+<li>尾部零</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">BigInteger bi1 = <span class="keyword">new</span> BigInteger(<span class="string">"1"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1000</span>; i++) &#123;</div><div class="line">	BigInteger bi2 = <span class="keyword">new</span> BigInteger(i+<span class="string">""</span>);</div><div class="line">	bi1 = bi1.multiply(bi2);	<span class="comment">//将bi1与bi2相乘的结果赋值给bi1</span></div><div class="line">&#125;</div><div class="line">String str = bi1.toString();	<span class="comment">//获取字符串表现形式</span></div><div class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder(str);</div><div class="line">str = sb.reverse().toString();	<span class="comment">//翻转字符串 //链式编程</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> count = <span class="number">0</span>;					<span class="comment">//定义计数器</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</div><div class="line">	<span class="keyword">if</span>(<span class="string">'0'</span> != str.charAt(i)) &#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(count);</div></pre></td></tr></table></figure>
+<h2 id="1000的阶乘尾部零的个数"><a href="#1000的阶乘尾部零的个数" class="headerlink" title="1000的阶乘尾部零的个数"></a>1000的阶乘尾部零的个数</h2><ul>
+<li>需求:求出1000的阶乘尾部零的个数,用递归做</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> args</span></div><div class="line"><span class="comment"> * 需求:求出1000的阶乘尾部零的个数,用递归做</span></div><div class="line"><span class="comment"> * 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100...1000  1000 / 5 = 200</span></div><div class="line"><span class="comment"> * 5 * 5	5 * 5 * 2 	5 * 5 * 3	5 * 5 * 4	5 * 5 * 5	5 * 5 * 6	200 / 5 = 40</span></div><div class="line"><span class="comment"> * 5 * 5 * 5 * 1	5 * 5 * 5 * 2	5 * 5 * 5 * 3	5 * 5 *  5 * 4	5 * 5 *  5 * 5	5 * 5 *  5 * 6	5 * 5 *  5 * 7	5 * 5 *  5 * 8</span></div><div class="line"><span class="comment">																		40 / 5 = 8</span></div><div class="line"><span class="comment">	5 * 5 * 5 * 5														8 / 5 = 1</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	System.out.println(fun(<span class="number">1000</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span>(num &gt; <span class="number">0</span> &amp;&amp; num &lt; <span class="number">5</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> num / <span class="number">5</span> + fun(num / <span class="number">5</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>还可以相乘除以10,给计数器++,个人喜欢这种方法</li>
+</ul>
+<h2 id="约瑟夫环"><a href="#约瑟夫环" class="headerlink" title="约瑟夫环"></a>约瑟夫环</h2><ul>
+<li>幸运数字</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> args</span></div><div class="line"><span class="comment"> * 约瑟夫环</span></div><div class="line"><span class="comment"> * * 幸运数字</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	System.out.println(getLucklyNum(<span class="number">8</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 获取幸运数字</span></div><div class="line"><span class="comment"> * 1,返回值类型int</span></div><div class="line"><span class="comment"> * 2,参数列表int num</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLucklyNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">	ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();		<span class="comment">//创建集合存储1到num的对象</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++) &#123;</div><div class="line">		list.add(i);									<span class="comment">//将1到num存储在集合中</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> count = <span class="number">1</span>;										<span class="comment">//用来数数的,只要是3的倍数就杀人</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; list.size() != <span class="number">1</span>; i++) &#123;				<span class="comment">//只要集合中人数超过1,就要不断的杀</span></div><div class="line">		<span class="keyword">if</span>(i == list.size()) &#123;							<span class="comment">//如果i增长到集合最大的索引+1时</span></div><div class="line">			i = <span class="number">0</span>;										<span class="comment">//重新归零</span></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">if</span>(count % <span class="number">3</span> == <span class="number">0</span>) &#123;							<span class="comment">//如果是3的倍数</span></div><div class="line">			list.remove(i--);								<span class="comment">//就杀人</span></div><div class="line">		&#125;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> list.get(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wxhao/wx-gzh.jpg" alt="Infinite Good wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您关注我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你觉得还不错,就请我喝杯咖啡吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wxhao/wxpay-m.jpg" alt="Infinite Good 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/wxhao/alipay-m.jpg" alt="Infinite Good 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/09/25/2013-09-25-io/" rel="next" title="JavaSE - IO流">
+                <i class="fa fa-chevron-left"></i> JavaSE - IO流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/10/15/2013-10-15-thread-one/" rel="prev" title="JavaSE - 多线程">
+                JavaSE - 多线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/wxhao/head.png"
+                alt="Infinite Good" />
+            
+              <p class="site-author-name" itemprop="name">Infinite Good</p>
+              <p class="site-description motion-element" itemprop="description">一枚天真无邪善良纯真的程序员欧巴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxhaor" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxhaor@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wxhao911" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="bilibili" target="_blank">bilibili</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#统计该文件夹大小"><span class="nav-number">1.</span> <span class="nav-text">统计该文件夹大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除该文件夹"><span class="nav-number">2.</span> <span class="nav-text">删除该文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拷贝"><span class="nav-number">3.</span> <span class="nav-text">拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按层级打印"><span class="nav-number">4.</span> <span class="nav-text">按层级打印</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#斐波那契数列"><span class="nav-number">5.</span> <span class="nav-text">斐波那契数列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1000的阶乘所有零和尾部零的个数"><span class="nav-number">6.</span> <span class="nav-text">1000的阶乘所有零和尾部零的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1000的阶乘尾部零的个数"><span class="nav-number">7.</span> <span class="nav-text">1000的阶乘尾部零的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约瑟夫环"><span class="nav-number">8.</span> <span class="nav-text">约瑟夫环</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Infinite Good</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyth2mi9I';
+      var conf = '4da0d3927cf9cf22b281a3d2f352ccbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

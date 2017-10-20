@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,JAVASE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点 。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等">
+<meta name="keywords" content="java,JAVASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Java语言前的准备">
+<meta property="og:url" content="http://wxhaor.me/2013/06/07/java-se/2013-06-07-java-basics/index.html">
+<meta property="og:site_name" content="Infinite Good的博客">
+<meta property="og:description" content="Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点 。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-06-29T03:39:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习Java语言前的准备">
+<meta name="twitter:description" content="Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点 。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wxhaor.me/2013/06/07/java-se/2013-06-07-java-basics/"/>
+
+
+
+
+
+  <title>学习Java语言前的准备 | Infinite Good的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Infinite Good的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">别把 无知当纯洁，把愚昧当德行，把偏见当原则</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wxhaor.me/2013/06/07/java-se/2013-06-07-java-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Infinite Good">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/wxhao/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Infinite Good的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习Java语言前的准备</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-06-07T00:00:00+08:00">
+                2013-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2013/06/07/java-se/2013-06-07-java-basics/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2013/06/07/java-se/2013-06-07-java-basics/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点 。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Java语言概述"><a href="#Java语言概述" class="headerlink" title="Java语言概述"></a>Java语言概述</h2><blockquote>
+<p>Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程</p>
+</blockquote>
+<h3 id="Java语言发展史"><a href="#Java语言发展史" class="headerlink" title="Java语言发展史"></a>Java语言发展史</h3><blockquote>
+<p>詹姆斯·高斯林（James Gosling）1977年获得了加拿大卡尔加里大学计算机科学学士学位，1983年获得了美国卡内基梅隆大学计算机科学博士学位，毕业后到IBM工作，设计IBM第一代工作站NeWS系统，但不受重视。后来转至Sun公司，1990年，与Patrick，Naughton和Mike Sheridan等人合作“绿色计划”，后来发展一套语言叫做“Oak”，后改名为Java。</p>
+</blockquote>
+<p>SUN(Stanford University Network，斯坦福大学网络公司) </p>
+<h3 id="Java语言版本"><a href="#Java语言版本" class="headerlink" title="Java语言版本"></a>Java语言版本</h3><ul>
+<li>JDK 1.1.4 Sparkler 宝石 1997-09-12</li>
+<li>JDK 1.1.5Pumpkin南瓜 1997-12-13</li>
+<li>JDK 1.1.6Abigail阿比盖尔–女子名1998-04-24</li>
+<li>JDK 1.1.7Brutus布鲁图–古罗马政治家和将军1998-09-28</li>
+<li>JDK 1.1.8Chelsea切尔西–城市名1999-04-08</li>
+<li>J2SE 1.2Playground运动场1998-12-04</li>
+<li>J2SE 1.2.1none无1999-03-30</li>
+<li>J2SE 1.2.2Cricket蟋蟀1999-07-08</li>
+<li>J2SE 1.3Kestrel美洲红隼(sǔn)2000-05-08</li>
+<li>J2SE 1.3.1Ladybird瓢虫2001-05-17</li>
+<li>J2SE 1.4.0Merlin灰背隼2002-02-13</li>
+<li>J2SE 1.4.1grasshopper蚱蜢2002-09-16</li>
+<li>J2SE 1.4.2Mantis螳螂2003-06-26</li>
+<li>JAVASE 5.0 (1.5.0)Tiger老虎</li>
+<li>JAVASE 5.1 (1.5.1)Dragonfly蜻蜓</li>
+<li>JAVASE 6.0 (1.6.0)Mustang野马/</li>
+<li>JAVASE 7.0 (1.7.0)Dolphin海豚</li>
+</ul>
+<h3 id="Java语言平台"><a href="#Java语言平台" class="headerlink" title="Java语言平台"></a>Java语言平台</h3><ul>
+<li><p>J2SE(Java 2 Platform Standard Edition)标准版<br>是为开发普通桌面和商务应用程序提供的解决方案,该技术体系是其他两者的基础，可以完成一些桌面应用程序的开发</p>
+</li>
+<li><p>J2ME(Java 2 Platform Micro Edition)小型版<br>是为开发电子消费产品和嵌入式设备提供的解决方案</p>
+</li>
+<li><p>J2EE(Java 2 Platform Enterprise Edition)企业版<br>是为开发企业环境下的应用程序提供的一套解决方案,该技术体系中包含的技术如 Servlet、Jsp等，主要针对于Web应用程序开发 </p>
+</li>
+</ul>
+<h3 id="Java语言特点"><a href="#Java语言特点" class="headerlink" title="Java语言特点"></a>Java语言特点</h3><ul>
+<li>简单性        </li>
+<li>解释性<ul>
+<li>面向对象    </li>
+</ul>
+</li>
+<li>高性能<ul>
+<li>分布式处理</li>
+</ul>
+</li>
+<li>多线程<ul>
+<li>健壮性    </li>
+</ul>
+</li>
+<li>动态<ul>
+<li>结构中立    </li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>开源</li>
+<li>跨平台</li>
+</ul>
+</li>
+</ul>
+<h3 id="Java语言跨平台原理"><a href="#Java语言跨平台原理" class="headerlink" title="Java语言跨平台原理"></a>Java语言跨平台原理</h3><blockquote>
+<p>write once ,run anywhere!(一处编译,到处运行)</p>
+</blockquote>
+<p>只要在需要运行java应用程序的操作系统上，先安装一个Java虚拟机(JVM Java Virtual Machine)即可。由JVM来负责Java程序在该系统中的运行。</p>
+<h3 id="JRE和JDK的概述"><a href="#JRE和JDK的概述" class="headerlink" title="JRE和JDK的概述"></a>JRE和JDK的概述</h3><ul>
+<li>什么是JRE<ul>
+<li>包括Java虚拟机(JVM Java Virtual Machine)和Java程序所需的核心类库等，如果想要运行一个开发好的Java程序，计算机中只需要安装JRE即可。</li>
+<li>JRE=JVM+类库。 </li>
+</ul>
+</li>
+<li>什么是JDK<ul>
+<li>JDK是提供给Java开发人员使用的，其中包含了java的开发工具，也包括了JRE。所以安装了JDK，就不用在单独安装JRE了。</li>
+<li>其中的开发工具：编译工具(javac.exe)  打包工具(jar.exe)等</li>
+<li>JDK=JRE+JAVA的开发工具。</li>
+</ul>
+</li>
+<li>为什么JDK中包含一个JRE<br> 因为写完程序需要看程序输出</li>
+</ul>
+<p>JDK,JRE,JVM的作用和关系</p>
+<ul>
+<li>JRE=JVM+类库</li>
+<li>JDK=JRE+JAVA开发工具类</li>
+</ul>
+<h2 id="安装java"><a href="#安装java" class="headerlink" title="安装java"></a>安装java</h2><h3 id="JDK的下载和安装过程"><a href="#JDK的下载和安装过程" class="headerlink" title="JDK的下载和安装过程"></a>JDK的下载和安装过程</h3><ul>
+<li>JDK的下载<br>官网 <a href="http://www.oracle.com" target="_blank" rel="external">http://www.oracle.com</a></li>
+<li>JDK的安装</li>
+<li>a: 傻瓜式安装<br> 双击安装程序，然后一路next即可(但是不建议)</li>
+<li>b: 安装的推荐方式<ul>
+<li>安装路径不要有中文或者特殊符号如空格等。</li>
+<li>所有和开发相关的软件最好安装目录统一。</li>
+<li>举例：我的JDK安装路径<br>D:\develop\Java\jdk1.7.0_72</li>
+<li>当提示安装JRE时，可以选择不安装。建议还是安装上。</li>
+</ul>
+</li>
+<li>c: 安装流程<ul>
+<li>可以先在d盘建立一个文件夹develop</li>
+<li>然后安装</li>
+</ul>
+</li>
+</ul>
+<p>验证安装是否成功</p>
+<ol>
+<li>通过DOS命令，切换到JDK安装的bin目录下。</li>
+<li>D:\develop\Java\jdk1.7.0_72\bin</li>
+<li>然后分别输入javac和java，如果正常显示非错误内容,说明安装成功</li>
+</ol>
+<h3 id="JDK安装路径下的目录解释"><a href="#JDK安装路径下的目录解释" class="headerlink" title="JDK安装路径下的目录解释"></a>JDK安装路径下的目录解释</h3><ul>
+<li><p>bin目录</p>
+<ul>
+<li>该目录用于存放一些可执行程序。</li>
+<li>如 javac.exe（java编译器）、java.exe(java运行工具)，jar.exe(打包工具)和* javadoc.exe(文档生成工具)等。</li>
+</ul>
+</li>
+<li><p>db目录:</p>
+<ul>
+<li>db目录是一个小型的数据库。</li>
+<li>从JDK 6.0开始，Java中引用了一个新的成员JavaDB，这是一个纯Java实现、开源的数据库管理系统。这个数据库不仅轻便，而且支持JDBC 4.0所有的规范，在学习JDBC 时，不再需要额外地安装一个数据库软件，选择直接使用JavaDB即可。</li>
+</ul>
+</li>
+<li><p>jre目录:<br>jre是 Java Runtime Environment 的缩写，意为Java程序运行时环境。此目录是Java运行时环境的根目录，它包括Java虚拟机，运行时的类包，Java应用启动器以及一个bin目录，但不包含开发环境中的开发工具。</p>
+</li>
+<li><p>include目录:<br>由于JDK是通过C和C++实现的，因此在启动时需要引入一些C语言的头文件，该目录就是用于存放这些头文件的。</p>
+</li>
+<li><p>lib目录:<br>lib是library的缩写，意为 Java 类库或库文件，是开发工具使用的归档包文件。</p>
+</li>
+<li><p>src.zip文件:<br>src.zip为src文件夹的压缩文件，src中放置的是JDK核心类的源代码，通过该文件可以查看Java基础类的源代码。</p>
+</li>
+</ul>
+<h2 id="helloworld"><a href="#helloworld" class="headerlink" title="helloworld"></a>helloworld</h2><h3 id="Java开发工具介绍"><a href="#Java开发工具介绍" class="headerlink" title="Java开发工具介绍"></a>Java开发工具介绍</h3><ul>
+<li>记事本(微软操作系统自带)</li>
+<li>Editplus/Notepad++</li>
+<li>Eclipse</li>
+<li>MyEclipse</li>
+</ul>
+<h3 id="HelloWorld案例的编写和运行"><a href="#HelloWorld案例的编写和运行" class="headerlink" title="HelloWorld案例的编写和运行"></a>HelloWorld案例的编写和运行</h3><ul>
+<li>A:定义类</li>
+<li>B:写main方法</li>
+<li>C:写输出语句</li>
+<li>D:Java程序开发运行与工作原理</li>
+<li>E:编译和运行程序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"HelloWorld"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HelloWorld案例常见问题"><a href="#HelloWorld案例常见问题" class="headerlink" title="HelloWorld案例常见问题"></a>HelloWorld案例常见问题</h3><ul>
+<li>A:找不到文件<ul>
+<li>a:文件扩展名隐藏导致编译失败</li>
+<li>b:文件名写错了</li>
+</ul>
+</li>
+<li>B:单词拼写问题<ul>
+<li>a:class写成Class</li>
+<li>b:String写成string</li>
+<li>c:System写成system</li>
+<li>d:main写成mian</li>
+</ul>
+</li>
+<li>C:括号匹配问题<ul>
+<li>a:把类体的那对大括号弄掉一个</li>
+<li>b:把方法体的那对大括号弄掉一个</li>
+<li>c:把输出语句的那对小括号弄掉一个</li>
+</ul>
+</li>
+<li>D:中英文问题<ul>
+<li>a:提示信息：错误: 非法字符: \????的格式</li>
+<li>注意：java编程中需要的基本上都是英文字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="Java语言的书写格式-约定俗成"><a href="#Java语言的书写格式-约定俗成" class="headerlink" title="Java语言的书写格式(约定俗成)"></a>Java语言的书写格式(约定俗成)</h3><ol>
+<li>大括号要对齐,并且成对写</li>
+<li>左大括号前面有空格</li>
+<li>遇到左大括号要缩进,Tab</li>
+<li>方法和程序块之间加空行让程序看起来清晰</li>
+<li>并排语句之间加空格,例如for语句</li>
+<li>运算符两侧加空格</li>
+</ol>
+<h2 id="java-环境变量"><a href="#java-环境变量" class="headerlink" title="java 环境变量"></a>java 环境变量</h2><h3 id="path环境变量的作用及配置方式"><a href="#path环境变量的作用及配置方式" class="headerlink" title="path环境变量的作用及配置方式"></a>path环境变量的作用及配置方式</h3><h4 id="方式1"><a href="#方式1" class="headerlink" title="方式1:"></a>方式1:</h4><ul>
+<li>在JDK的bin目录下开发程序容易产生的问题<ul>
+<li>如果文件过多，不方便管理</li>
+<li>删除自己写过的不需要的文件，可能不小心把JDK自带的工具给删除了</li>
+</ul>
+</li>
+<li>如何解决问题呢<br>notepad这样的命令为什么在任何路径下都能够执行,配置path环境变量</li>
+<li>配置方式<ul>
+<li>xp系统<br>右键点击桌面计算机→选择属性→选择高级选项卡→点击环境变量→下方系统变量中查找path→双击path→将jdk安装目录下的bin目录添加到最左边并添加分号。</li>
+<li>win7/win8系统<br>右键点击桌面计算机→选择属性→选择高级系统设置→选择高级选项卡→点击环境变量→下方系统变量中查找path→双击path→将jdk安装目录下的bin目录添加到最左边并添加分号。</li>
+</ul>
+</li>
+<li>path配置的是可执行的文件.exe,配置后可以在不同的盘符下访问path路径下的可执行文件</li>
+</ul>
+<h4 id="方式2"><a href="#方式2" class="headerlink" title="方式2:"></a>方式2:</h4><ol>
+<li>先配置JAVA_HOME</li>
+<li>再修改path</li>
+<li>最后说一下path是有先后顺序关系的</li>
+</ol>
+<h3 id="classpath环境变量的作用及其配置"><a href="#classpath环境变量的作用及其配置" class="headerlink" title="classpath环境变量的作用及其配置"></a>classpath环境变量的作用及其配置</h3><p>*为什么要配置classpath<br> 找到class文件并执行 </p>
+<ul>
+<li>classpath配置的原理<br> 同上</li>
+<li>如何配置classpath<br> 同上</li>
+</ul>
+<p><strong>JDK1.5之后不需要配置,默认将当前编译路径当成classpath</strong></p>
+<p>path和classpath的区别</p>
+<ul>
+<li>path配置的是可执行的文件.exe,配置后可以在不同的盘符下访问path路径下的可执行文件</li>
+<li>classpath配置的java的类文件,就是.class文件</li>
+</ul>
+<h2 id="java-语法概述"><a href="#java-语法概述" class="headerlink" title="java 语法概述"></a>java 语法概述</h2><h3 id="注释概述及其分类"><a href="#注释概述及其分类" class="headerlink" title="注释概述及其分类"></a>注释概述及其分类</h3><ul>
+<li>什么是注释<br> 用于解释说明程序的文字</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//1.单行注释//可以嵌套</span></div><div class="line">   </div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">2.多行注释(不能嵌套)</span></div><div class="line"><span class="comment">*/</span></div></pre></td></tr></table></figure>
+<ul>
+<li>注释的作用<ul>
+<li>解释说明程序</li>
+<li>帮助我们调试错误(注释出错代码)</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键字的概述和使用"><a href="#关键字的概述和使用" class="headerlink" title="关键字的概述和使用"></a>关键字的概述和使用</h3><ul>
+<li>什么是关键字<br> 被Java语言赋予特定含义的单词 </li>
+<li>关键字的特点<br> 组成关键字的字母全部小写 </li>
+<li>常见关键字<br> public static void class 等 </li>
+<li>关键字的注意事项<br> goto和const作为保留字存在,目前并不使用,类似Editplus这样的高级记事本,针对关键字有特殊的颜色标记，非常直观 </li>
+</ul>
+<h3 id="标识符的概述和组成规则"><a href="#标识符的概述和组成规则" class="headerlink" title="标识符的概述和组成规则"></a>标识符的概述和组成规则</h3><ul>
+<li>什么是标识符<br>就是给类,接口,方法,变量等起名字时使用的字符序列 </li>
+<li>标识符的组成规则<ul>
+<li>英文大小写字母</li>
+<li>数字字符</li>
+<li>$和_ </li>
+</ul>
+</li>
+<li>标识符注意事项<ul>
+<li>不能使用关键字</li>
+<li>不能数字开头 </li>
+</ul>
+</li>
+</ul>
+<h3 id="标识符中常见的命名规则"><a href="#标识符中常见的命名规则" class="headerlink" title="标识符中常见的命名规则"></a>标识符中常见的命名规则</h3><p>概述:<br>就是给类,接口,方法,变量等起名字时使用的字符序列</p>
+<ul>
+<li>包<br>最好是域名倒过来,要求所有的字母小写 </li>
+<li>类或者接口<ul>
+<li>如果是一个单词首字母大写</li>
+<li>如果是多个单词每个单词首字母大写(驼峰标识) </li>
+</ul>
+</li>
+<li>方法或者变量<ul>
+<li>如果是一个单词全部小写</li>
+<li>如果是多个单词,从第二个单词首字母大写 </li>
+</ul>
+</li>
+<li><p>常量</p>
+<ul>
+<li>如果是一个单词,所有字母大写</li>
+<li>如果是多个单词,所有的单词大写,用下划线区分每个单词</li>
+</ul>
+</li>
+<li><p>组成规则</p>
+<ul>
+<li>英文大小写字母</li>
+<li>数字字符</li>
+<li>$和_</li>
+</ul>
+</li>
+<li>注意事项<ul>
+<li>不能以数字开头</li>
+<li>不能是JAVA关键字</li>
+<li>区分大小写</li>
+</ul>
+</li>
+</ul>
+<h3 id="常量的概述和使用"><a href="#常量的概述和使用" class="headerlink" title="常量的概述和使用"></a>常量的概述和使用</h3><ul>
+<li>什么是常量<br>在程序执行的过程中其值不可以发生改变 </li>
+<li>Java中常量的分类<br>字面值常量<br>自定义常量</li>
+<li>字面值常量的分类<ul>
+<li>字符串常量 用双引号括起来的内容</li>
+<li>整数常量 所有整数</li>
+<li>小数常量所有小数</li>
+<li>字符常量用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号</li>
+<li>布尔常量较为特殊，只有true和false</li>
+<li>空常量    null</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">System.out.print(<span class="string">"abc"</span>);<span class="comment">//字符串常量</span></div><div class="line">System.out.print(<span class="number">123</span>);<span class="comment">//整数常量</span></div><div class="line">System.out.print(<span class="number">12.3</span>);<span class="comment">//小数常量</span></div><div class="line">System.out.print(<span class="string">'a'</span>);<span class="comment">//字符常量(''中必须放单个数字/字母/符号,不能为空)</span></div><div class="line">System.out.print(ture);<span class="comment">//布尔常量(true/false)</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wxhao/wx-gzh.jpg" alt="Infinite Good wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您关注我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你觉得还不错,就请我喝杯咖啡吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wxhao/wxpay-m.jpg" alt="Infinite Good 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/wxhao/alipay-m.jpg" alt="Infinite Good 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/06/06/wxhao/2013-06-06-computer-basics/" rel="next" title="计算机基础">
+                <i class="fa fa-chevron-left"></i> 计算机基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/06/09/java-se/2013-06-09-java-basics-hex-yfb/" rel="prev" title="Java语言基础之进制及原反补码">
+                Java语言基础之进制及原反补码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/wxhao/head.png"
+                alt="Infinite Good" />
+            
+              <p class="site-author-name" itemprop="name">Infinite Good</p>
+              <p class="site-description motion-element" itemprop="description">一枚天真无邪善良纯真的程序员欧巴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxhaor" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxhaor@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wxhao911" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="bilibili" target="_blank">bilibili</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java语言概述"><span class="nav-number">1.</span> <span class="nav-text">Java语言概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言发展史"><span class="nav-number">1.1.</span> <span class="nav-text">Java语言发展史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言版本"><span class="nav-number">1.2.</span> <span class="nav-text">Java语言版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言平台"><span class="nav-number">1.3.</span> <span class="nav-text">Java语言平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言特点"><span class="nav-number">1.4.</span> <span class="nav-text">Java语言特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言跨平台原理"><span class="nav-number">1.5.</span> <span class="nav-text">Java语言跨平台原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JRE和JDK的概述"><span class="nav-number">1.6.</span> <span class="nav-text">JRE和JDK的概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装java"><span class="nav-number">2.</span> <span class="nav-text">安装java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK的下载和安装过程"><span class="nav-number">2.1.</span> <span class="nav-text">JDK的下载和安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK安装路径下的目录解释"><span class="nav-number">2.2.</span> <span class="nav-text">JDK安装路径下的目录解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#helloworld"><span class="nav-number">3.</span> <span class="nav-text">helloworld</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java开发工具介绍"><span class="nav-number">3.1.</span> <span class="nav-text">Java开发工具介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld案例的编写和运行"><span class="nav-number">3.2.</span> <span class="nav-text">HelloWorld案例的编写和运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld案例常见问题"><span class="nav-number">3.3.</span> <span class="nav-text">HelloWorld案例常见问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言的书写格式-约定俗成"><span class="nav-number">3.4.</span> <span class="nav-text">Java语言的书写格式(约定俗成)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-环境变量"><span class="nav-number">4.</span> <span class="nav-text">java 环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#path环境变量的作用及配置方式"><span class="nav-number">4.1.</span> <span class="nav-text">path环境变量的作用及配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式1"><span class="nav-number">4.1.1.</span> <span class="nav-text">方式1:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方式2"><span class="nav-number">4.1.2.</span> <span class="nav-text">方式2:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classpath环境变量的作用及其配置"><span class="nav-number">4.2.</span> <span class="nav-text">classpath环境变量的作用及其配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-语法概述"><span class="nav-number">5.</span> <span class="nav-text">java 语法概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注释概述及其分类"><span class="nav-number">5.1.</span> <span class="nav-text">注释概述及其分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字的概述和使用"><span class="nav-number">5.2.</span> <span class="nav-text">关键字的概述和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符的概述和组成规则"><span class="nav-number">5.3.</span> <span class="nav-text">标识符的概述和组成规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符中常见的命名规则"><span class="nav-number">5.4.</span> <span class="nav-text">标识符中常见的命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量的概述和使用"><span class="nav-number">5.5.</span> <span class="nav-text">常量的概述和使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Infinite Good</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyth2mi9I';
+      var conf = '4da0d3927cf9cf22b281a3d2f352ccbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/wxhao/head.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,JAVASE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaSE - IO流">
+<meta name="keywords" content="java,JAVASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE集合框架 - Map集合">
+<meta property="og:url" content="http://wxhaor.me/2013/09/05/2013-09-05-map/index.html">
+<meta property="og:site_name" content="Infinite Good的博客">
+<meta property="og:description" content="JavaSE - IO流">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wxhaor.me/2013/09/05/2013-09-05-map/!--￼17--%3E/post-in/20130905/hashqb.png">
+<meta property="og:image" content="http://wxhaor.me/2013/09/05/2013-09-05-map/!--￼18--%3E/post-in/20130905/jhqz.png">
+<meta property="og:image" content="http://wxhaor.me/2013/09/05/2013-09-05-map/!--￼19--%3E/post-in/20130905/gjjzdxhq.png">
+<meta property="og:image" content="http://wxhaor.me/2013/09/05/2013-09-05-map/!--￼20--%3E/post-in/20130905/ddz.png">
+<meta property="og:updated_time" content="2017-06-29T03:35:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaSE集合框架 - Map集合">
+<meta name="twitter:description" content="JavaSE - IO流">
+<meta name="twitter:image" content="http://wxhaor.me/2013/09/05/2013-09-05-map/!--￼17--%3E/post-in/20130905/hashqb.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wxhaor.me/2013/09/05/2013-09-05-map/"/>
+
+
+
+
+
+  <title>JavaSE集合框架 - Map集合 | Infinite Good的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Infinite Good的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">别把 无知当纯洁，把愚昧当德行，把偏见当原则</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wxhaor.me/2013/09/05/2013-09-05-map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Infinite Good">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/wxhao/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Infinite Good的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaSE集合框架 - Map集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-09-05T00:00:00+08:00">
+                2013-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2013/09/05/2013-09-05-map/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2013/09/05/2013-09-05-map/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>JavaSE - IO流  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Map集合概述和特点"><a href="#Map集合概述和特点" class="headerlink" title="Map集合概述和特点"></a>Map集合概述和特点</h2><ul>
+<li>Map接口概述<ul>
+<li>查看API可以知道：<ul>
+<li>将键映射到值的对象</li>
+<li>一个映射不能包含重复的键</li>
+<li>每个键最多只能映射到一个值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:Map接口和Collection接口的不同<ul>
+<li>Map是双列的,Collection是单列的</li>
+<li>Map的键唯一,Collection的子体系Set是唯一的</li>
+<li>Map集合的数据结构值针对键有效，跟值无关;Collection集合的数据结构是针对元素有效</li>
+</ul>
+</li>
+</ul>
+<p><img src="!--￼17--&gt;/post-in/20130905/hashqb.png" alt="谁引用谁"></p>
+<h2 id="Map集合的功能概述"><a href="#Map集合的功能概述" class="headerlink" title="Map集合的功能概述"></a>Map集合的功能概述</h2><ul>
+<li>Map集合的功能概述<ul>
+<li>a:添加功能<ul>
+<li>V put(K key,V value):添加元素。<ul>
+<li>如果键是第一次存储，就直接存储元素，返回null</li>
+<li>如果键不是第一次存在，就用值把以前的值替换掉，返回以前的值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b:删除功能<ul>
+<li>void clear():移除所有的键值对元素</li>
+<li>V remove(Object key)：根据键删除键值对元素，并把值返回</li>
+</ul>
+</li>
+<li>c:判断功能<ul>
+<li>boolean containsKey(Object key)：判断集合是否包含指定的键</li>
+<li>boolean containsValue(Object value):判断集合是否包含指定的值</li>
+<li>boolean isEmpty()：判断集合是否为空</li>
+</ul>
+</li>
+<li>d:获取功能<ul>
+<li>Set<map.entry<k,v>&gt; entrySet():</map.entry<k,v></li>
+<li>V get(Object key):根据键获取值</li>
+<li>Set<k> keySet():获取集合中所有键的集合</k></li>
+<li>Collection<v> values():获取集合中所有值的集合</v></li>
+</ul>
+</li>
+<li>e:长度功能<ul>
+<li>int size()：返回集合中的键值对的个数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//demo1();</span></div><div class="line">	<span class="comment">//demo2();</span></div><div class="line">	Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	map.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	map.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	map.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	</div><div class="line">	Collection&lt;Integer&gt; c = map.values();</div><div class="line">	System.out.println(c);</div><div class="line">	System.out.println(map.size());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> </span>&#123;</div><div class="line">	Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	map.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	map.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	map.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//Integer value = map.remove("张三");				//根据键删除元素,返回键对应的值</span></div><div class="line">	<span class="comment">//System.out.println(value);</span></div><div class="line">	System.out.println(map.containsKey(<span class="string">"张三"</span>));		<span class="comment">//判断是否包含传入的键</span></div><div class="line">	System.out.println(map.containsValue(<span class="number">100</span>));		<span class="comment">//判断是否包含传入的值</span></div><div class="line">	System.out.println(map);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">	Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	Integer i1 = map.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	Integer i2= map.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	Integer i3 = map.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	Integer i4 = map.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	Integer i5 = map.put(<span class="string">"张三"</span>, <span class="number">26</span>);					<span class="comment">//相同的键不存储,值覆盖,把被覆盖的值返回</span></div><div class="line">	</div><div class="line">	System.out.println(map);</div><div class="line">	</div><div class="line">	System.out.println(i1);</div><div class="line">	System.out.println(i2);</div><div class="line">	System.out.println(i3);</div><div class="line">	System.out.println(i4);</div><div class="line">	System.out.println(i5);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Map集合的遍历之键找值"><a href="#Map集合的遍历之键找值" class="headerlink" title="Map集合的遍历之键找值"></a>Map集合的遍历之键找值</h2><ul>
+<li><p>键找值思路：</p>
+<ul>
+<li>获取所有键的集合</li>
+<li>遍历键的集合，获取到每一个键</li>
+<li>根据键找值</li>
+</ul>
+</li>
+<li><p>Map集合的遍历之键找值</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 通过查看Map集合的api发现没有iterator方法,那么双列集合如何迭代呢?</span></div><div class="line"><span class="comment"> * 根据键获取值</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	map.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	map.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	map.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	</div><div class="line"><span class="comment">//		Integer i = map.get("张三");					//根据键获取值</span></div><div class="line"><span class="comment">//		System.out.println(i);</span></div><div class="line">	</div><div class="line">	<span class="comment">//获取所有的键</span></div><div class="line">	<span class="comment">/*Set&lt;String&gt; keySet = map.keySet();			//获取所有键的集合</span></div><div class="line"><span class="comment">	Iterator&lt;String&gt; it = keySet.iterator();	//获取迭代器</span></div><div class="line"><span class="comment">	while(it.hasNext()) &#123;						//判断集合中是否有元素</span></div><div class="line"><span class="comment">		String key = it.next();					//获取每一个键</span></div><div class="line"><span class="comment">		Integer value = map.get(key);			//根据键获取值</span></div><div class="line"><span class="comment">		System.out.println(key + "=" + value);</span></div><div class="line"><span class="comment">	&#125;*/</span></div><div class="line">	</div><div class="line">	<span class="comment">//使用增强for循环遍历</span></div><div class="line">	<span class="keyword">for</span>(String key : map.keySet()) &#123;			<span class="comment">//map.keySet()是所有键的集合</span></div><div class="line">		System.out.println(key + <span class="string">"="</span> + map.get(key));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="!--￼18--&gt;/post-in/20130905/jhqz.png" alt="根据键获取值"></p>
+<h2 id="Map集合的遍历之键值对对象找键和值"><a href="#Map集合的遍历之键值对对象找键和值" class="headerlink" title="Map集合的遍历之键值对对象找键和值)"></a>Map集合的遍历之键值对对象找键和值)</h2><ul>
+<li><p>A:键值对对象找键和值思路：</p>
+<ul>
+<li>获取所有键值对对象的集合</li>
+<li>遍历键值对对象的集合，获取到每一个键值对对象</li>
+<li>根据键值对对象找键和值</li>
+</ul>
+</li>
+<li><p>Map集合的遍历之键值对对象找键和值</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Map集合的第二种迭代,根据键值对对象,获取键和值</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	map.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	map.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	map.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//Map.Entry说明Entry是Map的内部接口,将键和值封装成了Entry对象,并存储在Set集合中</span></div><div class="line">	<span class="comment">/*Set&lt;Map.Entry&lt;String, Integer&gt;&gt; entrySet = map.entrySet();</span></div><div class="line"><span class="comment">	//获取每一个对象</span></div><div class="line"><span class="comment">	Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; it = entrySet.iterator();</span></div><div class="line"><span class="comment">	while(it.hasNext()) &#123;</span></div><div class="line"><span class="comment">		//获取每一个Entry对象</span></div><div class="line"><span class="comment">		Map.Entry&lt;String, Integer&gt; en = it.next();	//父类引用指向子类对象</span></div><div class="line"><span class="comment">		//Entry&lt;String, Integer&gt; en = it.next();	//直接获取的是子类对象</span></div><div class="line"><span class="comment">		String key = en.getKey();					//根据键值对对象获取键</span></div><div class="line"><span class="comment">		Integer value = en.getValue();				//根据键值对对象获取值</span></div><div class="line"><span class="comment">		System.out.println(key + "=" + value);</span></div><div class="line"><span class="comment">	&#125;*/</span></div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(Entry&lt;String, Integer&gt; en : map.entrySet()) &#123;</div><div class="line">		System.out.println(en.getKey() + <span class="string">"="</span> + en.getValue());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="!--￼19--&gt;/post-in/20130905/gjjzdxhq.png" alt="根据键值对象获取"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.map;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4_MapEntry</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * <span class="doctag">@param</span> args</span></div><div class="line"><span class="comment">	 * 解释一个Map.Entry</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Inter</span> </span>&#123;</div><div class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">Inter2</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">implements</span> <span class="title">Inter</span>.<span class="title">Inter2</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="HashMap集合键是Student值是String的案例"><a href="#HashMap集合键是Student值是String的案例" class="headerlink" title="HashMap集合键是Student值是String的案例"></a>HashMap集合键是Student值是String的案例</h2><ul>
+<li>HashMap集合键是Student值是String的案例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.bean;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Student</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Student [name="</span> + name + <span class="string">", age="</span> + age + <span class="string">"]"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">final</span> <span class="keyword">int</span> prime = <span class="number">31</span>;</div><div class="line">		<span class="keyword">int</span> result = <span class="number">1</span>;</div><div class="line">		result = prime * result + age;</div><div class="line">		result = prime * result + ((name == <span class="keyword">null</span>) ? <span class="number">0</span> : name.hashCode());</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span> == obj)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">if</span> (obj == <span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		<span class="keyword">if</span> (getClass() != obj.getClass())</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		Student other = (Student) obj;</div><div class="line">		<span class="keyword">if</span> (age != other.age)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		<span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">if</span> (other.name != <span class="keyword">null</span>)</div><div class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!name.equals(other.name))</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Student o)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> num = <span class="keyword">this</span>.age - o.age;					<span class="comment">//以年龄为主要条件</span></div><div class="line">		<span class="keyword">return</span> num == <span class="number">0</span> ? <span class="keyword">this</span>.name.compareTo(o.name) : num;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.map;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.wxhao.bean.Student;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5_HashMap</span> </span>&#123;</div><div class="line">	<span class="comment">/*</span></div><div class="line"><span class="comment">	 * HashMap集合键是Student值是String的案例</span></div><div class="line"><span class="comment">	 * 键是学生对象,代表每一个学生</span></div><div class="line"><span class="comment">	 * 值是字符串对象,代表学生归属地</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		HashMap&lt;Student, String&gt; hm = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">		hm.put(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">23</span>), <span class="string">"北京"</span>);</div><div class="line">		hm.put(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">23</span>), <span class="string">"上海"</span>);</div><div class="line">		hm.put(<span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">24</span>), <span class="string">"广州"</span>);</div><div class="line">		hm.put(<span class="keyword">new</span> Student(<span class="string">"王五"</span>, <span class="number">25</span>), <span class="string">"深圳"</span>);</div><div class="line">		</div><div class="line">		System.out.println(hm);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="LinkedHashMap的概述和使用"><a href="#LinkedHashMap的概述和使用" class="headerlink" title="LinkedHashMap的概述和使用"></a>LinkedHashMap的概述和使用</h2><ul>
+<li>LinkedHashMap的特点</li>
+<li>底层是链表实现的可以保证怎么存就怎么取</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * LinkedHashMap可以保证怎么存就怎么取</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	LinkedHashMap&lt;String, Integer&gt; lhm = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</div><div class="line">	lhm.put(<span class="string">"张三"</span>, <span class="number">23</span>);</div><div class="line">	lhm.put(<span class="string">"李四"</span>, <span class="number">24</span>);</div><div class="line">	lhm.put(<span class="string">"赵六"</span>, <span class="number">26</span>);</div><div class="line">	lhm.put(<span class="string">"王五"</span>, <span class="number">25</span>);</div><div class="line">	</div><div class="line">	System.out.println(lhm);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="TreeMap集合键是Student值是String的案例"><a href="#TreeMap集合键是Student值是String的案例" class="headerlink" title="TreeMap集合键是Student值是String的案例"></a>TreeMap集合键是Student值是String的案例</h2><ul>
+<li>TreeMap集合键是Student值是String的案例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//demo1();</span></div><div class="line">	TreeMap&lt;Student, String&gt; tm = <span class="keyword">new</span> TreeMap&lt;&gt;(<span class="keyword">new</span> Comparator&lt;Student&gt;() &#123;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student s1, Student s2)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> num = s1.getName().compareTo(s2.getName());		<span class="comment">//按照姓名比较</span></div><div class="line">			<span class="keyword">return</span> num == <span class="number">0</span> ? s1.getAge() - s2.getAge() : num;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">23</span>), <span class="string">"北京"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">13</span>), <span class="string">"上海"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"赵六"</span>, <span class="number">43</span>), <span class="string">"深圳"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"王五"</span>, <span class="number">33</span>), <span class="string">"广州"</span>);</div><div class="line">	</div><div class="line">	System.out.println(tm);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">	TreeMap&lt;Student, String&gt; tm = <span class="keyword">new</span> TreeMap&lt;&gt;();</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">23</span>), <span class="string">"北京"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">13</span>), <span class="string">"上海"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"王五"</span>, <span class="number">33</span>), <span class="string">"广州"</span>);</div><div class="line">	tm.put(<span class="keyword">new</span> Student(<span class="string">"赵六"</span>, <span class="number">43</span>), <span class="string">"深圳"</span>);</div><div class="line">	</div><div class="line">	System.out.println(tm);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="统计字符串中每个字符出现的次数"><a href="#统计字符串中每个字符出现的次数" class="headerlink" title="统计字符串中每个字符出现的次数"></a>统计字符串中每个字符出现的次数</h2><ul>
+<li>需求：统计字符串中每个字符出现的次数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 分析:</span></div><div class="line"><span class="comment"> * 1,定义一个需要被统计字符的字符串</span></div><div class="line"><span class="comment"> * 2,将字符串转换为字符数组</span></div><div class="line"><span class="comment"> * 3,定义双列集合,存储字符串中字符以及字符出现的次数</span></div><div class="line"><span class="comment"> * 4,遍历字符数组获取每一个字符,并将字符存储在双列集合中</span></div><div class="line"><span class="comment"> * 5,存储过程中要做判断,如果集合中不包含这个键,就将该字符当作键,值为1存储,如果集合中包含这个键,就将值加1存储</span></div><div class="line"><span class="comment"> * 6,打印双列集合获取字符出现的次数</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//1,定义一个需要被统计字符的字符串</span></div><div class="line">	String s = <span class="string">"aaaabbbbbccccccccccccc"</span>;</div><div class="line">	<span class="comment">//2,将字符串转换为字符数组</span></div><div class="line">	<span class="keyword">char</span>[] arr = s.toCharArray();</div><div class="line">	<span class="comment">//3,定义双列集合,存储字符串中字符以及字符出现的次数</span></div><div class="line">	HashMap&lt;Character, Integer&gt; hm = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	<span class="comment">//4,遍历字符数组获取每一个字符,并将字符存储在双列集合中</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">char</span> c: arr) &#123;</div><div class="line">		<span class="comment">//5,存储过程中要做判断,如果集合中不包含这个键,就将该字符当作键,值为1存储,如果集合中包含这个键,就将值加1存储</span></div><div class="line">		<span class="comment">/*if(!hm.containsKey(c)) &#123;			//如果不包含这个键</span></div><div class="line"><span class="comment">			hm.put(c, 1);</span></div><div class="line"><span class="comment">		&#125;else &#123;</span></div><div class="line"><span class="comment">			hm.put(c, hm.get(c) + 1);</span></div><div class="line"><span class="comment">		&#125;*/</span></div><div class="line">		hm.put(c, !hm.containsKey(c) ? <span class="number">1</span> : hm.get(c) + <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//6,打印双列集合获取字符出现的次数</span></div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (Character key : hm.keySet()) &#123;				<span class="comment">//hm.keySet()代表所有键的集合</span></div><div class="line">		System.out.println(key + <span class="string">"="</span> + hm.get(key));<span class="comment">//hm.get(key)根据键获取值</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a>HashMap和Hashtable的区别</h2><ul>
+<li><p>HashMap和Hashtable的区别</p>
+<ul>
+<li>Hashtable是JDK1.0版本出现的,是线程安全的,效率低,HashMap是JDK1.2版本出现的,是线程不安全的,效率高<ul>
+<li>Hashtable不可以存储null键和null值,HashMap可以存储null键和null值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HashMap和Hashtable的区别</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> args</span></div><div class="line"><span class="comment"> * 面试题</span></div><div class="line"><span class="comment"> * HashMap和Hashtable的区别</span></div><div class="line"><span class="comment"> * 共同点:</span></div><div class="line"><span class="comment"> * 底层都是哈希算法,都是双列集合</span></div><div class="line"><span class="comment"> * 区别:</span></div><div class="line"><span class="comment"> * 1,HashMap是线程不安全的,效率高,JDK1.2版本</span></div><div class="line"><span class="comment"> *   Hashtable是线程安全的,效率低,JDK1.0版本的</span></div><div class="line"><span class="comment"> * 2,HashMap可以存储null键和null值</span></div><div class="line"><span class="comment"> *   Hashtable不可以存储null键和null值</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	HashMap&lt;String, Integer&gt; hm = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	hm.put(<span class="keyword">null</span>, <span class="number">23</span>);</div><div class="line">	hm.put(<span class="string">"李四"</span>, <span class="keyword">null</span>);</div><div class="line">	System.out.println(hm);</div><div class="line">	</div><div class="line">	<span class="comment">/*Hashtable&lt;String, Integer&gt; ht = new Hashtable&lt;&gt;();</span></div><div class="line"><span class="comment">	//ht.put(null, 23);</span></div><div class="line"><span class="comment">	ht.put("张三", null);</span></div><div class="line"><span class="comment">	System.out.println(ht);*/</span></div><div class="line">	</div><div class="line">	<span class="comment">//抛异常后面程序就不会执行</span></div><div class="line">	System.out.println(<span class="string">"1111111111111"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Collections工具类的概述和常见方法讲解"><a href="#Collections工具类的概述和常见方法讲解" class="headerlink" title="Collections工具类的概述和常见方法讲解"></a>Collections工具类的概述和常见方法讲解</h2><ul>
+<li>A:Collections类概述<ul>
+<li>针对集合操作 的工具类</li>
+</ul>
+</li>
+<li>B:Collections成员方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(List&lt;T&gt; list)</span></span></div><div class="line"><span class="function">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(List&lt;?&gt; list,T key)</span></span></div><div class="line"><span class="function">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T <span class="title">max</span><span class="params">(Collection&lt;?&gt; coll)</span></span></div><div class="line"><span class="function">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(List&lt;?&gt; list)</span></span></div><div class="line"><span class="function">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shuffle</span><span class="params">(List&lt;?&gt; list)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 	Collecitons中的常见方法</span></div><div class="line"><span class="comment"> * 	public static &lt;T&gt; void sort(List&lt;T&gt; list)</span></div><div class="line"><span class="comment">	public static &lt;T&gt; int binarySearch(List&lt;?&gt; list,T key)</span></div><div class="line"><span class="comment">	public static &lt;T&gt; T max(Collection&lt;?&gt; coll)</span></div><div class="line"><span class="comment">	public static void reverse(List&lt;?&gt; list)</span></div><div class="line"><span class="comment">	public static void shuffle(List&lt;?&gt; list)</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//demo1();</span></div><div class="line">	<span class="comment">//demo2();</span></div><div class="line">	ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	list.add(<span class="string">"a"</span>);</div><div class="line">	list.add(<span class="string">"c"</span>);</div><div class="line">	list.add(<span class="string">"d"</span>);</div><div class="line">	list.add(<span class="string">"g"</span>);</div><div class="line">	list.add(<span class="string">"f"</span>);</div><div class="line">	<span class="comment">//System.out.println(Collections.max(list)); 			//根据默认排序结果获取集合中的最大值</span></div><div class="line">	<span class="comment">//Collections.reverse(list);							//反转集合</span></div><div class="line">	Collections.shuffle(list);								<span class="comment">//随机置换,可以用来洗牌</span></div><div class="line">	System.out.println(list);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> </span>&#123;</div><div class="line">	ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	list.add(<span class="string">"a"</span>);</div><div class="line">	list.add(<span class="string">"c"</span>);</div><div class="line">	list.add(<span class="string">"d"</span>);</div><div class="line">	list.add(<span class="string">"f"</span>);</div><div class="line">	list.add(<span class="string">"g"</span>);</div><div class="line">	</div><div class="line">	System.out.println(Collections.binarySearch(list, <span class="string">"c"</span>));</div><div class="line">	System.out.println(Collections.binarySearch(list, <span class="string">"b"</span>));<span class="comment">//负的插入点减一</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">	ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	list.add(<span class="string">"c"</span>);</div><div class="line">	list.add(<span class="string">"a"</span>);</div><div class="line">	list.add(<span class="string">"a"</span>);</div><div class="line">	list.add(<span class="string">"b"</span>);</div><div class="line">	list.add(<span class="string">"d"</span>);</div><div class="line">	</div><div class="line">	System.out.println(list);</div><div class="line">	Collections.sort(list);						<span class="comment">//将集合排序</span></div><div class="line">	System.out.println(list);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="模拟斗地主洗牌和发牌"><a href="#模拟斗地主洗牌和发牌" class="headerlink" title="模拟斗地主洗牌和发牌"></a>模拟斗地主洗牌和发牌</h2><ul>
+<li>模拟斗地主洗牌和发牌，牌没有排序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> * 分析:</span></div><div class="line"><span class="comment"> * 1,买一副扑克,其实就是自己创建一个集合对象,将扑克牌存储进去</span></div><div class="line"><span class="comment"> * 2,洗牌</span></div><div class="line"><span class="comment"> * 3,发牌</span></div><div class="line"><span class="comment"> * 4,看牌</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//1,买一副扑克,其实就是自己创建一个集合对象,将扑克牌存储进去</span></div><div class="line">	String[] num = &#123;<span class="string">"A"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>,<span class="string">"6"</span>,<span class="string">"7"</span>,<span class="string">"8"</span>,<span class="string">"9"</span>,<span class="string">"10"</span>,<span class="string">"J"</span>,<span class="string">"Q"</span>,<span class="string">"K"</span>&#125;;</div><div class="line">	String[] color = &#123;<span class="string">"红桃"</span>,<span class="string">"黑桃"</span>,<span class="string">"方片"</span>,<span class="string">"梅花"</span>&#125;;</div><div class="line">	ArrayList&lt;String&gt; poker = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	</div><div class="line">	<span class="comment">//拼接花色和数字</span></div><div class="line">	<span class="keyword">for</span>(String s1 : color) &#123;</div><div class="line">		<span class="keyword">for</span>(String s2 : num) &#123;</div><div class="line">			poker.add(s1.concat(s2)); 			<span class="comment">//concat连接两个字符串</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	poker.add(<span class="string">"小王"</span>);</div><div class="line">	poker.add(<span class="string">"大王"</span>);</div><div class="line">	<span class="comment">//2,洗牌</span></div><div class="line">	Collections.shuffle(poker);</div><div class="line">	<span class="comment">//3,发牌</span></div><div class="line">	ArrayList&lt;String&gt; gaojin = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	ArrayList&lt;String&gt; longwu = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	ArrayList&lt;String&gt; me = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	ArrayList&lt;String&gt; dipai = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; poker.size(); i++) &#123;</div><div class="line">		<span class="keyword">if</span>(i &gt;= poker.size() - <span class="number">3</span>) &#123;</div><div class="line">			dipai.add(poker.get(i));					<span class="comment">//将三张底牌存储在底牌集合中</span></div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(i % <span class="number">3</span> == <span class="number">0</span>) &#123;</div><div class="line">			gaojin.add(poker.get(i));</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(i % <span class="number">3</span> == <span class="number">1</span>) &#123;</div><div class="line">			longwu.add(poker.get(i));</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			me.add(poker.get(i));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//4,看牌</span></div><div class="line">	System.out.println(gaojin);</div><div class="line">	System.out.println(longwu);</div><div class="line">	System.out.println(me);</div><div class="line">	System.out.println(dipai);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="模拟斗地主洗牌和发牌并对牌进行排序的原理图解"><a href="#模拟斗地主洗牌和发牌并对牌进行排序的原理图解" class="headerlink" title="模拟斗地主洗牌和发牌并对牌进行排序的原理图解"></a>模拟斗地主洗牌和发牌并对牌进行排序的原理图解</h2><p><img src="!--￼20--&gt;/post-in/20130905/ddz.png" alt="斗地主"></p>
+<h2 id="模拟斗地主洗牌和发牌并对牌进行排序的代码实现"><a href="#模拟斗地主洗牌和发牌并对牌进行排序的代码实现" class="headerlink" title="模拟斗地主洗牌和发牌并对牌进行排序的代码实现"></a>模拟斗地主洗牌和发牌并对牌进行排序的代码实现</h2><ul>
+<li>模拟斗地主洗牌和发牌并对牌进行排序的代码实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//1,买一副扑克,其实就是自己创建一个集合对象,将扑克牌存储进去</span></div><div class="line">	String[] num = &#123;<span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>,<span class="string">"6"</span>,<span class="string">"7"</span>,<span class="string">"8"</span>,<span class="string">"9"</span>,<span class="string">"10"</span>,<span class="string">"J"</span>,<span class="string">"Q"</span>,<span class="string">"K"</span>,<span class="string">"A"</span>,<span class="string">"2"</span>&#125;;</div><div class="line">	String[] color = &#123;<span class="string">"红桃"</span>,<span class="string">"黑桃"</span>,<span class="string">"方片"</span>,<span class="string">"梅花"</span>&#125;;</div><div class="line">	HashMap&lt;Integer, String&gt; hm = <span class="keyword">new</span> HashMap&lt;&gt;();<span class="comment">//存储索引和扑克牌</span></div><div class="line">	ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();<span class="comment">//存储索引</span></div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="comment">//拼接扑克牌并索引和扑克牌存储在hm中</span></div><div class="line">	<span class="keyword">for</span>(String s1 : num) &#123;<span class="comment">//获取数字</span></div><div class="line">		<span class="keyword">for</span>(String s2 : color) &#123;<span class="comment">//获取颜色</span></div><div class="line">			hm.put(index, s2.concat(s1));</div><div class="line">			list.add(index);<span class="comment">//将索引0到51添加到list集合中</span></div><div class="line">			index++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//将小王添加到双列集合中</span></div><div class="line">	hm.put(index, <span class="string">"小王"</span>);</div><div class="line">	list.add(index);<span class="comment">//将52索引添加到集合中</span></div><div class="line">	index++;</div><div class="line">	hm.put(index, <span class="string">"大王"</span>);</div><div class="line">	list.add(index);<span class="comment">//将52索引添加到集合中</span></div><div class="line">	</div><div class="line">	<span class="comment">//2,洗牌</span></div><div class="line">	Collections.shuffle(list);</div><div class="line">	<span class="comment">//3,发牌</span></div><div class="line">	TreeSet&lt;Integer&gt; gaojin = <span class="keyword">new</span> TreeSet&lt;&gt;();</div><div class="line">	TreeSet&lt;Integer&gt; longwu = <span class="keyword">new</span> TreeSet&lt;&gt;();</div><div class="line">	TreeSet&lt;Integer&gt; me = <span class="keyword">new</span> TreeSet&lt;&gt;();</div><div class="line">	TreeSet&lt;Integer&gt; dipai = <span class="keyword">new</span> TreeSet&lt;&gt;();</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</div><div class="line">		<span class="keyword">if</span>(i &gt;= list.size() - <span class="number">3</span>) &#123;</div><div class="line">			dipai.add(list.get(i));	<span class="comment">//将三张底牌存储在底牌集合中</span></div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i % <span class="number">3</span> == <span class="number">0</span>) &#123;</div><div class="line">			gaojin.add(list.get(i));</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i % <span class="number">3</span> == <span class="number">1</span>) &#123;</div><div class="line">			longwu.add(list.get(i));</div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			me.add(list.get(i));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//看牌</span></div><div class="line">	lookPoker(hm, gaojin, <span class="string">"高进"</span>);</div><div class="line">	lookPoker(hm, longwu, <span class="string">"龙五"</span>);</div><div class="line">	lookPoker(hm, me, <span class="string">"冯佳"</span>);</div><div class="line">	lookPoker(hm, dipai, <span class="string">"底牌"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 看牌</span></div><div class="line"><span class="comment"> * 1,返回值类型void</span></div><div class="line"><span class="comment"> * 2,参数列表HashMap,TreeSet,String name</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lookPoker</span><span class="params">(HashMap&lt;Integer, String&gt; hm,TreeSet&lt;Integer&gt; ts ,String name)</span> </span>&#123;</div><div class="line">	System.out.print(name + <span class="string">"的牌是:"</span>);</div><div class="line">	<span class="keyword">for</span>(Integer i : ts) &#123;<span class="comment">//i代表双列集合中的每一个键</span></div><div class="line">		System.out.print(hm.get(i) + <span class="string">" "</span>);</div><div class="line">	&#125;</div><div class="line">	System.out.println();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="泛型固定下边界"><a href="#泛型固定下边界" class="headerlink" title="泛型固定下边界"></a>泛型固定下边界</h2><ul>
+<li>? super E</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wxhao.collections;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.Comparator;</div><div class="line"><span class="keyword">import</span> java.util.TreeSet;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.wxhao.bean.BaseStudent;</div><div class="line"><span class="keyword">import</span> com.wxhao.bean.Student;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2_Genric</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 泛型固定下边界</span></div><div class="line"><span class="comment">	 * ? super E  </span></div><div class="line"><span class="comment">	 * </span></div><div class="line"><span class="comment">	 * 泛型固定上边界</span></div><div class="line"><span class="comment">	 * ? extends E</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//demo1();</span></div><div class="line">		TreeSet&lt;Student&gt; ts1 = <span class="keyword">new</span> TreeSet&lt;&gt;(<span class="keyword">new</span> CompareByAge());</div><div class="line">		ts1.add(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">33</span>));</div><div class="line">		ts1.add(<span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">13</span>));</div><div class="line">		ts1.add(<span class="keyword">new</span> Student(<span class="string">"王五"</span>, <span class="number">23</span>));</div><div class="line">		ts1.add(<span class="keyword">new</span> Student(<span class="string">"赵六"</span>, <span class="number">43</span>));</div><div class="line">		</div><div class="line">		TreeSet&lt;BaseStudent&gt; ts2 = <span class="keyword">new</span> TreeSet&lt;&gt;(<span class="keyword">new</span> CompareByAge());</div><div class="line">		ts2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"张三"</span>, <span class="number">33</span>));</div><div class="line">		ts2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"李四"</span>, <span class="number">13</span>));</div><div class="line">		ts2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"王五"</span>, <span class="number">23</span>));</div><div class="line">		ts2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"赵六"</span>, <span class="number">43</span>));</div><div class="line">		</div><div class="line">		System.out.println(ts2);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</div><div class="line">		ArrayList&lt;Student&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		list1.add(<span class="keyword">new</span> Student(<span class="string">"张三"</span>, <span class="number">23</span>));</div><div class="line">		list1.add(<span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">24</span>));</div><div class="line">		</div><div class="line">		ArrayList&lt;BaseStudent&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		list2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"王五"</span>, <span class="number">25</span>));</div><div class="line">		list2.add(<span class="keyword">new</span> BaseStudent(<span class="string">"赵六"</span>, <span class="number">26</span>));</div><div class="line">		</div><div class="line">		<span class="comment">//boolean java.util.ArrayList.addAll(Collection&lt;? extends Student&gt; c)</span></div><div class="line">		list1.addAll(list2);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompareByAge</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Student</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student s1, Student s2)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> num = s1.getAge() - s2.getAge();</div><div class="line">		<span class="keyword">return</span> num == <span class="number">0</span> ? s1.getName().compareTo(s2.getName()) :  num;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="复习"><a href="#复习" class="headerlink" title="复习"></a>复习</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Collection</span></div><div class="line"><span class="comment"> * 		List(存取有序,有索引,可以重复)</span></div><div class="line"><span class="comment"> * 			ArrayList</span></div><div class="line"><span class="comment"> * 				底层是数组实现的,线程不安全,查找和修改快,增和删比较慢</span></div><div class="line"><span class="comment"> * 			LinkedList</span></div><div class="line"><span class="comment"> * 				底层是链表实现的,线程不安全,增和删比较快,查找和修改比较慢</span></div><div class="line"><span class="comment"> * 			Vector</span></div><div class="line"><span class="comment"> * 				底层是数组实现的,线程安全的,无论增删改查都慢</span></div><div class="line"><span class="comment"> * 			如果查找和修改多,用ArrayList</span></div><div class="line"><span class="comment"> * 			如果增和删多,用LinkedList</span></div><div class="line"><span class="comment"> * 			如果都多,用ArrayList</span></div><div class="line"><span class="comment"> * 		Set(存取无序,无索引,不可以重复)</span></div><div class="line"><span class="comment"> * 			HashSet</span></div><div class="line"><span class="comment"> * 				底层是哈希算法实现</span></div><div class="line"><span class="comment"> * 				LinkedHashSet</span></div><div class="line"><span class="comment"> * 					底层是链表实现,但是也是可以保证元素唯一,和HashSet原理一样</span></div><div class="line"><span class="comment"> * 			TreeSet</span></div><div class="line"><span class="comment"> * 				底层是二叉树算法实现</span></div><div class="line"><span class="comment"> * 			一般在开发的时候不需要对存储的元素排序,所以在开发的时候大多用HashSet,HashSet的效率比较高</span></div><div class="line"><span class="comment"> * 			TreeSet在面试的时候比较多,问你有几种排序方式,和几种排序方式的区别</span></div><div class="line"><span class="comment"> * Map</span></div><div class="line"><span class="comment"> * 		HashMap</span></div><div class="line"><span class="comment"> * 			底层是哈希算法,针对键</span></div><div class="line"><span class="comment"> * 			LinkedHashMap</span></div><div class="line"><span class="comment"> * 				底层是链表,针对键</span></div><div class="line"><span class="comment"> * 		TreeMap</span></div><div class="line"><span class="comment"> * 			底层是二叉树算法,针对键</span></div><div class="line"><span class="comment"> * 		开发中用HashMap比较多</span></div><div class="line"><span class="comment"> */</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/wxhao/wx-gzh.jpg" alt="Infinite Good wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您关注我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你觉得还不错,就请我喝杯咖啡吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wxhao/wxpay-m.jpg" alt="Infinite Good 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/wxhao/alipay-m.jpg" alt="Infinite Good 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/08/30/2013-08-30-collection-set/" rel="next" title="JavaSE集合框架 - Set集合">
+                <i class="fa fa-chevron-left"></i> JavaSE集合框架 - Set集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/09/12/wxhao/2013-09-12-jdk/" rel="prev" title="jdk">
+                jdk <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/wxhao/head.png"
+                alt="Infinite Good" />
+            
+              <p class="site-author-name" itemprop="name">Infinite Good</p>
+              <p class="site-description motion-element" itemprop="description">一枚天真无邪善良纯真的程序员欧巴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxhaor" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxhaor@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wxhao911" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="bilibili" target="_blank">bilibili</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map集合概述和特点"><span class="nav-number">1.</span> <span class="nav-text">Map集合概述和特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map集合的功能概述"><span class="nav-number">2.</span> <span class="nav-text">Map集合的功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map集合的遍历之键找值"><span class="nav-number">3.</span> <span class="nav-text">Map集合的遍历之键找值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map集合的遍历之键值对对象找键和值"><span class="nav-number">4.</span> <span class="nav-text">Map集合的遍历之键值对对象找键和值)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap集合键是Student值是String的案例"><span class="nav-number">5.</span> <span class="nav-text">HashMap集合键是Student值是String的案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap的概述和使用"><span class="nav-number">6.</span> <span class="nav-text">LinkedHashMap的概述和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap集合键是Student值是String的案例"><span class="nav-number">7.</span> <span class="nav-text">TreeMap集合键是Student值是String的案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计字符串中每个字符出现的次数"><span class="nav-number">8.</span> <span class="nav-text">统计字符串中每个字符出现的次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap和Hashtable的区别"><span class="nav-number">9.</span> <span class="nav-text">HashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collections工具类的概述和常见方法讲解"><span class="nav-number">10.</span> <span class="nav-text">Collections工具类的概述和常见方法讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟斗地主洗牌和发牌"><span class="nav-number">11.</span> <span class="nav-text">模拟斗地主洗牌和发牌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟斗地主洗牌和发牌并对牌进行排序的原理图解"><span class="nav-number">12.</span> <span class="nav-text">模拟斗地主洗牌和发牌并对牌进行排序的原理图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟斗地主洗牌和发牌并对牌进行排序的代码实现"><span class="nav-number">13.</span> <span class="nav-text">模拟斗地主洗牌和发牌并对牌进行排序的代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型固定下边界"><span class="nav-number">14.</span> <span class="nav-text">泛型固定下边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习"><span class="nav-number">15.</span> <span class="nav-text">复习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Infinite Good</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyth2mi9I';
+      var conf = '4da0d3927cf9cf22b281a3d2f352ccbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
